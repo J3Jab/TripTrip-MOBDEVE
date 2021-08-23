@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">TripTrip Mobile App</string>
+    <string name="app_title">TripTrip</string>
+    <string name="login">Log In</string>
+    <string name="logout">Log Out</string>
+    <string name="register">Register</string>
+    <string name="register_accnt">Register Account</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="no_accnt">No Account?</string>
+    <string name="view_profile">View Profile</string>
+    <string name="edit_profile">Edit Profile</string>
+
+    <string name="input_name">Name</string>
+    <string name="input_birthday">Birthday</string>
+    <string name="input_email">E-mail</string>
+    <string name="input_password">Password</string>
+    <string name="input_confirm_password">Confirm Password</string>
+
+    <!--  options for dropdown menu  -->
+    <string-array name="sort_options">
+        <item>Start Date</item>
+        <item>End Date</item>
+        <item>Destination</item>
+    </string-array>
+</resources>
