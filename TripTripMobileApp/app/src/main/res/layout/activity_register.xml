@@ -4,35 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/mountains"
     tools:context=".RegisterActivity">
 
     <ImageView
-        android:id="@+id/iv_login_mountains2"
+        android:id="@+id/iv_register_mountains"
         android:layout_width="1666dp"
         android:layout_height="1468dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.381"
+        app:layout_constraintVertical_bias="0.377"
         app:srcCompat="@drawable/mountains" />
+
+    <TextView
+        android:id="@+id/tv_register_bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/menu_black"
+        android:backgroundTint="@color/menu_black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/et_register_confirm_password"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="60dp"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:inputType="textPassword"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/tv_register_accnt"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="@+id/tv_register_accnt"
+        app:layout_constraintEnd_toEndOf="@+id/et_register_password"
+        app:layout_constraintStart_toStartOf="@+id/et_register_password"
         app:layout_constraintTop_toBottomOf="@+id/et_register_password" />
 
     <TextView
-        android:id="@+id/tv_register_password2"
+        android:id="@+id/tv_register_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#FFFFFF"
@@ -47,16 +60,15 @@
 
     <EditText
         android:id="@+id/et_register_password"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="60dp"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:inputType="textPassword"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/tv_register_accnt"
-        app:layout_constraintHorizontal_bias="0.50"
-        app:layout_constraintStart_toStartOf="@+id/tv_register_accnt"
+        app:layout_constraintEnd_toEndOf="@+id/et_register_email"
+        app:layout_constraintStart_toStartOf="@+id/et_register_email"
         app:layout_constraintTop_toBottomOf="@+id/et_register_email" />
 
     <TextView
@@ -75,16 +87,16 @@
 
     <EditText
         android:id="@+id/et_register_bday"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="60dp"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:inputType="date"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/tv_register_accnt"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="@+id/tv_register_accnt"
+        app:layout_constraintEnd_toEndOf="@+id/et_rregister_name"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_rregister_name"
         app:layout_constraintTop_toBottomOf="@+id/et_rregister_name" />
 
     <TextView
@@ -125,55 +137,44 @@
         app:layout_constraintBottom_toTopOf="@+id/et_rregister_name"
         app:layout_constraintEnd_toEndOf="@+id/et_rregister_name"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/et_rregister_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_register_accnt"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="@+id/et_rregister_name" />
 
     <EditText
         android:id="@+id/et_rregister_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="35dp"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/tv_register_accnt"
-        app:layout_constraintStart_toStartOf="@+id/tv_register_accnt"
-        app:layout_constraintTop_toBottomOf="@+id/tv_register_accnt" />
+        android:textColorHint="@color/hint_gray"
+        app:layout_constraintEnd_toEndOf="@+id/tv_register_bg"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_register_bg"
+        app:layout_constraintTop_toTopOf="@+id/tv_register_bg" />
 
     <EditText
         android:id="@+id/et_register_email"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="60dp"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/tv_register_accnt"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/tv_register_accnt"
+        app:layout_constraintEnd_toEndOf="@+id/et_register_bday"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_register_bday"
         app:layout_constraintTop_toBottomOf="@+id/et_register_bday" />
 
-    <TextView
-        android:id="@+id/tv_register_accnt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="@string/register_accnt"
-        android:textColor="@color/white"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/btn_edit_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:text="@string/register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/et_register_confirm_password"

@@ -15,6 +15,14 @@
     <string name="input_email">E-mail</string>
     <string name="input_password">Password</string>
     <string name="input_confirm_password">Confirm Password</string>
+    <string name="save_changes">Save Changes</string>
+
+    <string name="enter_title">Enter Trip Title</string>
+    <string name="enter_start_date">Enter Start Date</string>
+    <string name="enter_end_date">Enter End Date</string>
+    <string name="enter_start_location">Enter Start Location</string>
+    <string name="enter_end_location">Enter End Location</string>
+    <string name="enter_create_trip">Create Trip</string>
 
     <!--  options for dropdown menu  -->
     <string-array name="sort_options">

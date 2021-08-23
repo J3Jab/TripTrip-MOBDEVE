@@ -17,6 +17,7 @@ public class TripViewHolder extends RecyclerView.ViewHolder {
     private TextView tvStartDate;
     private TextView tvEndDate;
     private TextView tvDestination;
+    private TextView tvTripType;
 
     public TripViewHolder(@NonNull @NotNull View itemView) {
         super(itemView);
@@ -26,6 +27,7 @@ public class TripViewHolder extends RecyclerView.ViewHolder {
         this.tvStartDate = itemView.findViewById(R.id.tv_start_date);
         this.tvEndDate = itemView.findViewById(R.id.tv_end_date);
         this.tvDestination = itemView.findViewById(R.id.tv_trip_destination);
+        this.tvTripType = itemView.findViewById(R.id.tv_trip_type);
 
     }
 
@@ -56,6 +58,10 @@ public class TripViewHolder extends RecyclerView.ViewHolder {
 
     public void setDestination(String destination) {
         this.tvDestination.setText(destination);
+    }
+
+    public void setTripType(String type) {
+        this.tvTripType.setText(type);
     }
 
 

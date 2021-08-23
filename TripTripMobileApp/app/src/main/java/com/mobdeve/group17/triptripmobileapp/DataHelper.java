@@ -14,21 +14,24 @@ public class DataHelper {
                 "Nice Trip",
                 "08/23/21",
                 "08/23/21",
-                "Philippines"));
+                "Philippines",
+                "Round"));
+
+        trips.add(new Trip(
+                0,
+                "Nice Trip",
+                "08/23/21",
+                "08/23/21",
+                "Philippines",
+                "Single"));
 
         trips.add(new Trip(
                 R.drawable.mountains,
                 "Nice Trip",
                 "08/23/21",
                 "08/23/21",
-                "Philippines"));
-
-        trips.add(new Trip(
-                R.drawable.mountains,
-                "Nice Trip",
-                "08/23/21",
-                "08/23/21",
-                "Philippines"));
+                "Philippines",
+                "Round"));
         return trips;
     }
 }

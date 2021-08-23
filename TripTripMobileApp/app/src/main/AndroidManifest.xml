@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mobdeve.group17.triptripmobileapp">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,8 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TripTripMobileApp">
-        <activity android:name=".EditTripActivity"></activity>
-        <activity android:name=".EditProfileActivity" />
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key"/>
+
+        <activity
+            android:name=".EditProfileActivity"
+            android:label="Edit Profile"/>
+        <activity
+            android:name=".EditTripActivity"
+            android:label="Edit Trip"/>
         <activity
             android:name=".AddTripActivity"
             android:label="Add Trip" />
@@ -20,7 +33,9 @@
         <activity
             android:name=".RegisterActivity"
             android:label="Register Account" />
-        <activity android:name=".TripsActivity" />
+        <activity
+            android:name=".TripsActivity"
+            android:label="Your Planned Trips"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
