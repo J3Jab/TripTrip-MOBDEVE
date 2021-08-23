@@ -1,6 +1,7 @@
 # TripTrip-MOBDEVE
 
 ### Views that have been added with layout and design: 
+- [activity_edit_profile.xml] activity view for edit profile
 - [activity_login.xml] activity view for user login
 - [activity_main.xml] activity view for main view, temporarily contains list of trips for easier testing
 - [activity_register.xml] activity view for register account 
