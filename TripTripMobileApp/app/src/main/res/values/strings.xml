@@ -15,7 +15,7 @@
     <string name="input_email">E-mail</string>
     <string name="input_password">Password</string>
     <string name="input_confirm_password">Confirm Password</string>
-    <string name="save_changes">Save Changes</string>
+    <string name="save">Save</string>
 
     <string name="enter_title">Enter Trip Title</string>
     <string name="enter_start_date">Enter Start Date</string>
