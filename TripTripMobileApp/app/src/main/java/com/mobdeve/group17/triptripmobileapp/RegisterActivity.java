@@ -28,7 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
         repassword = (EditText) findViewById(R.id.et_register_confirm_password);
         db = new DatabaseHelper(this);
 
-        register = (Button) findViewById(R.id.btn_edit_profile);
+        register = (Button) findViewById(R.id.btn_register);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
