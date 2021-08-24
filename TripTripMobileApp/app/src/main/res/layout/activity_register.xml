@@ -94,10 +94,10 @@
         android:ems="10"
         android:inputType="date"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/et_rregister_name"
+        app:layout_constraintEnd_toEndOf="@+id/et_register_name"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/et_rregister_name"
-        app:layout_constraintTop_toBottomOf="@+id/et_rregister_name" />
+        app:layout_constraintStart_toStartOf="@+id/et_register_name"
+        app:layout_constraintTop_toBottomOf="@+id/et_register_name" />
 
     <TextView
         android:id="@+id/tv_register_bday"
@@ -110,7 +110,7 @@
         app:layout_constraintEnd_toEndOf="@+id/et_register_bday"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/et_register_bday"
-        app:layout_constraintTop_toBottomOf="@+id/et_rregister_name"
+        app:layout_constraintTop_toBottomOf="@+id/et_register_name"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -134,13 +134,13 @@
         android:backgroundTint="#FFFFFF"
         android:text="@string/input_name"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/et_rregister_name"
-        app:layout_constraintEnd_toEndOf="@+id/et_rregister_name"
+        app:layout_constraintBottom_toTopOf="@+id/et_register_name"
+        app:layout_constraintEnd_toEndOf="@+id/et_register_name"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/et_rregister_name" />
+        app:layout_constraintStart_toStartOf="@+id/et_register_name" />
 
     <EditText
-        android:id="@+id/et_rregister_name"
+        android:id="@+id/et_register_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
