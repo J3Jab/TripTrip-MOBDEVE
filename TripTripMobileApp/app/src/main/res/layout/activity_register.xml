@@ -171,7 +171,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_register_bday" />
 
     <Button
-        android:id="@+id/btn_edit_profile"
+        android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
