@@ -19,9 +19,15 @@
             android:value="@string/map_key" />
 
         <activity
+            android:name=".NewPasswordActivity"
+            android:label="Create New Password"/>
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:label="Forgot Password"/>
+
+        <activity
             android:name=".ViewProfileActivity"
             android:label="View Profile" />
-
         <activity
             android:name=".EditProfileActivity"
             android:label="Edit Profile" />
