@@ -14,6 +14,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText name, birthday, email, password, repassword;
     Button register;
     DatabaseHelper db;
+    User user;
 
 
     @Override
@@ -33,20 +34,20 @@ public class RegisterActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user_name = name.getText().toString();
-                String user_bday = birthday.getText().toString();
-                String user_email = email.getText().toString();
-                String user_password = password.getText().toString();
+                user.setName(name.getText().toString());
+                user.setBirthday(birthday.getText().toString());
+                user.setEmail(email.getText().toString());
+                user.setPassword(password.getText().toString());
                 String user_repassword = repassword.getText().toString();
 
-                if(user_name.equals("") || user_bday.equals("") || user_email.equals("")
-                        || user_password.equals("") || user_repassword.equals(""))
+                if(user.getName().equals("") || user.getBirthday().equals("") || user.getEmail().equals("")
+                        || user.getPassword().equals("") || user_repassword.equals(""))
                     Toast.makeText(RegisterActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                 else{
-                    if(user_password.equals(user_repassword)){
-                        Boolean checkuser = db.checkUserEmail(user_email);
+                    if(user.getPassword().equals(user_repassword)){
+                        Boolean checkuser = db.checkUserEmail(user.getEmail());
                         if(!checkuser){
-                            Boolean insert = db.addUser(user_email, user_name, user_bday, user_password);
+                            Boolean insert = db.addUser(user);
                             if(insert == true){
                                 Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);

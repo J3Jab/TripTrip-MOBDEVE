@@ -51,13 +51,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * This method is to create user record
      */
-    public Boolean addUser(String email, String name, String bday, String password) {
+    public Boolean addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_USER_EMAIL, email);
-        values.put(COLUMN_USER_NAME, name);
-        values.put(COLUMN_USER_BDAY, bday);
-        values.put(COLUMN_USER_PASSWORD, password);
+        values.put(COLUMN_USER_EMAIL, user.getEmail());
+        values.put(COLUMN_USER_NAME, user.getName());
+        values.put(COLUMN_USER_BDAY, user.getBirthday());
+        values.put(COLUMN_USER_PASSWORD, user.getPassword());
         // Inserting Row
         long result = db.insert(TABLE_USER, null, values);
         if(result == -1)

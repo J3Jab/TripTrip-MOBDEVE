@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user_email = email.getText().toString();
-                String user_password = password.getText().toString();
+                String user_email = email.getText().toString().trim();
+                String user_password = password.getText().toString().trim();
 
                 if(user_email.equals("") || user_password.equals(""))
                     Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
