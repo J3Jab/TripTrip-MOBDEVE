@@ -18,11 +18,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView rv_trips;
-    private ArrayList<Trip> dataTrips;
-    private RecyclerView.LayoutManager layoutManager;
-    private TripAdapter adapter;
-
+    public static final String KEY_CURR_USER = "KEY_CURR_USER";
     EditText email, password;
     Button register, login;
     DatabaseHelper db;
@@ -49,16 +45,17 @@ public class MainActivity extends AppCompatActivity {
                 String user_email = email.getText().toString().trim();
                 String user_password = password.getText().toString().trim();
 
-                if(user_email.equals("") || user_password.equals(""))
+                if (user_email.equals("") || user_password.equals(""))
                     Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
-                else{
+                else {
                     Boolean checkuserpass = db.checkUserEmailPassword(user_email, user_password);
-                    if(checkuserpass){
+                    if (checkuserpass) {
                         Toast.makeText(MainActivity.this, "Sign in successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), TripsActivity.class);
+                        Object currentUserNameKey;
+                        intent.putExtra(KEY_CURR_USER, user_email);
                         startActivity(intent);
-                    }
-                    else{
+                    } else {
                         Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -72,31 +69,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-//        Spinner dropdown = (Spinner) findViewById(R.id.dropdown);
-
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this,
-//                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.sort_options));
-
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this,
-//                R.layout.item_dropdown, getResources().getStringArray(R.array.sort_options));
-//
-//                arrayAdapter.setDropDownViewResource(R.layout.item_dropdown);
-//        dropdown.setAdapter(arrayAdapter);
-    }
-
-    public void initRecyclerView(){
-
-        this.rv_trips = findViewById(R.id.rv_trips);
-        this.dataTrips = new DataHelper().getTrips();
-
-        this.layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-        this.rv_trips.setLayoutManager(this.layoutManager);
-
-        this.adapter = new TripAdapter(this.dataTrips);
-        this.rv_trips.setAdapter(this.adapter);
-
-        Log.d("message", "main working");
-
     }
 }
