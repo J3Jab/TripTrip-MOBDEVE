@@ -18,18 +18,13 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String KEY_CURR_USER = "KEY_CURR_USER";
     EditText email, password;
     Button register, login;
     DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("message", "main1 working");
         setContentView(R.layout.activity_login);
-        Log.d("message", "main2 working");
-        //        initRecyclerView();
-        Log.d("message", "main3 working");
 
         email = (EditText) findViewById(R.id.et_login_email);
         password = (EditText) findViewById(R.id.et_login_password);
@@ -45,17 +40,16 @@ public class MainActivity extends AppCompatActivity {
                 String user_email = email.getText().toString().trim();
                 String user_password = password.getText().toString().trim();
 
-                if (user_email.equals("") || user_password.equals(""))
+                if(user_email.equals("") || user_password.equals(""))
                     Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
-                else {
+                else{
                     Boolean checkuserpass = db.checkUserEmailPassword(user_email, user_password);
-                    if (checkuserpass) {
+                    if(checkuserpass){
                         Toast.makeText(MainActivity.this, "Sign in successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), TripsActivity.class);
-                        Object currentUserNameKey;
-                        intent.putExtra(KEY_CURR_USER, user_email);
                         startActivity(intent);
-                    } else {
+                    }
+                    else{
                         Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -69,5 +63,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
+
+
 }

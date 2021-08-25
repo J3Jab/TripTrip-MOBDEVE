@@ -1,6 +1,5 @@
 package com.mobdeve.group17.triptripmobileapp;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,8 +15,8 @@ public class TripViewHolder extends RecyclerView.ViewHolder {
     private TextView tvTripTitle;
     private TextView tvStartDate;
     private TextView tvEndDate;
-    private TextView tvDestination;
-    private TextView tvTripType;
+    private TextView tvStartLocation;
+    private TextView tvEndLocation;
 
     public TripViewHolder(@NonNull @NotNull View itemView) {
         super(itemView);
@@ -26,8 +25,8 @@ public class TripViewHolder extends RecyclerView.ViewHolder {
         this.tvTripTitle = itemView.findViewById(R.id.tv_trip_title);
         this.tvStartDate = itemView.findViewById(R.id.tv_start_date);
         this.tvEndDate = itemView.findViewById(R.id.tv_end_date);
-        this.tvDestination = itemView.findViewById(R.id.tv_trip_destination);
-        this.tvTripType = itemView.findViewById(R.id.tv_trip_type);
+        this.tvStartLocation = itemView.findViewById(R.id.tv_start_location);
+        this.tvEndLocation = itemView.findViewById(R.id.tv_end_location);
 
     }
 
@@ -56,12 +55,12 @@ public class TripViewHolder extends RecyclerView.ViewHolder {
         this.tvEndDate.setText(endDate);
     }
 
-    public void setDestination(String destination) {
-        this.tvDestination.setText(destination);
+    public void setStartLocation(String startLocation) {
+        this.tvStartLocation.setText(startLocation);
     }
 
-    public void setTripType(String type) {
-        this.tvTripType.setText(type);
+    public void setEndLocation(String endLocation) {
+        this.tvEndLocation.setText(endLocation);
     }
 
 
