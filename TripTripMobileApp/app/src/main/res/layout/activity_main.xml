@@ -64,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_sort_label">>
 
         <Spinner
-            android:id="@+id/dropdown"
+            android:id="@+id/dropdown_sort_date"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="0dp"
@@ -79,7 +79,7 @@
     </RelativeLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/fab_add_trip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="510dp"

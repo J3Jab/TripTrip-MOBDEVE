@@ -18,16 +18,54 @@
         app:srcCompat="@drawable/mountains" />
 
     <TextView
-        android:id="@+id/tv_register_bg2"
+        android:id="@+id/tv_add_bg"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/menu_blue"
+        android:backgroundTint="@color/menu_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <RelativeLayout
+        android:id="@+id/rl_add_dropdown_container"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:background="@color/menu_blue"
+        app:layout_constraintEnd_toEndOf="@+id/et_add_description"
+        app:layout_constraintStart_toStartOf="@+id/et_add_description"
+        app:layout_constraintTop_toBottomOf="@+id/tv_add_type_label">>
+
+        <Spinner
+            android:id="@+id/dropdown_trip_type"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:backgroundTint="@color/white"
+            android:prompt="@string/select_trip_type"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></Spinner>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_add_type_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/select_trip_type"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/rl_add_dropdown_container"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/rl_add_dropdown_container"
+        app:layout_constraintTop_toBottomOf="@+id/et_add_end_location" />
 
     <EditText
         android:id="@+id/et_add_start_date"
@@ -70,17 +108,20 @@
         android:ems="10"
         android:hint="@string/enter_title"
         android:inputType="text"
+        android:maxLength="20"
         android:textColor="@color/white"
         android:textColorHint="@color/hint_gray"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_register_bg2" />
+        app:layout_constraintTop_toTopOf="@+id/tv_add_bg" />
 
     <EditText
         android:id="@+id/et_add_start_location"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:hint="@string/enter_start_location"
@@ -95,6 +136,7 @@
         android:id="@+id/et_add_end_location"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:hint="@string/enter_end_location"
@@ -105,6 +147,23 @@
         app:layout_constraintStart_toStartOf="@+id/et_add_start_location"
         app:layout_constraintTop_toBottomOf="@+id/et_add_start_location" />
 
+    <EditText
+        android:id="@+id/et_add_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#FFFFFF"
+        android:ems="10"
+        android:hint="@string/enter_description"
+        android:inputType="textLongMessage"
+        android:maxLength="50"
+        android:textColor="@color/white"
+        android:textColorHint="@color/hint_gray"
+        app:layout_constraintEnd_toEndOf="@+id/et_add_start_location"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_add_start_location"
+        app:layout_constraintTop_toBottomOf="@+id/rl_add_dropdown_container" />
+
     <Button
         android:id="@+id/btn_create_trip"
         android:layout_width="wrap_content"
@@ -112,9 +171,9 @@
         android:backgroundTint="@color/yellow_green"
         android:text="@string/enter_create_trip"
         android:textColor="@color/btn_text_blue"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_register_bg2"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_add_bg"
         app:layout_constraintEnd_toEndOf="@+id/et_add_end_location"
         app:layout_constraintStart_toStartOf="@+id/et_add_end_location"
-        app:layout_constraintTop_toBottomOf="@+id/et_add_end_location" />
+        app:layout_constraintTop_toBottomOf="@+id/et_add_description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

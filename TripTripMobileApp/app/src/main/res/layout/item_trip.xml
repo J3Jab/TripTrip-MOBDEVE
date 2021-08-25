@@ -24,7 +24,7 @@
             android:scaleType="centerCrop"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tv_trip_destination"
+            app:layout_constraintEnd_toEndOf="@+id/tv_start_location"
             app:layout_constraintStart_toStartOf="@+id/tv_trip_title"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
@@ -35,7 +35,7 @@
             android:id="@+id/tv_start_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
             android:text="Start Date"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/tv_trip_title"
@@ -46,38 +46,54 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
             android:text="-"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/tv_start_date"
-            app:layout_constraintTop_toBottomOf="@+id/tv_trip_title" />
+            app:layout_constraintTop_toTopOf="@+id/tv_start_date" />
+
+        <TextView
+            android:id="@+id/tv_hyphen2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"
+            android:textColor="@color/highlight_blue"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_end_location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.858"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_start_location" />
 
         <TextView
             android:id="@+id/tv_end_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="25dp"
             android:text="End Date"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_hyphen"
-            app:layout_constraintTop_toBottomOf="@+id/tv_trip_title" />
+            app:layout_constraintTop_toTopOf="@+id/tv_hyphen"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/tv_trip_type"
+            android:id="@+id/tv_end_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="4dp"
-            android:text="Trip Type"
+            android:layout_marginTop="20dp"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:text="End Location"
             android:textColor="@color/highlight_blue"
-            android:textSize="16sp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/tv_end_date"
-            app:layout_constraintEnd_toStartOf="@+id/tv_trip"
-            app:layout_constraintTop_toBottomOf="@+id/tv_trip_destination"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintEnd_toEndOf="@+id/tv_start_location"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/tv_end_date"
+            app:layout_constraintTop_toBottomOf="@+id/tv_start_location" />
 
         <TextView
             android:id="@+id/tv_trip"
@@ -87,9 +103,10 @@
             android:text="Trip"
             android:textColor="@color/highlight_blue"
             android:textSize="16sp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/tv_end_date"
-            app:layout_constraintEnd_toEndOf="@+id/tv_trip_destination"
-            app:layout_constraintTop_toBottomOf="@+id/tv_trip_destination"
+            app:layout_constraintEnd_toEndOf="@+id/tv_start_location"
+            app:layout_constraintTop_toBottomOf="@+id/tv_start_location"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
@@ -98,6 +115,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
+            android:ellipsize="end"
+            android:maxLength="10"
+            android:maxLines="2"
+            android:scrollHorizontally="true"
+            android:singleLine="false"
             android:text="Trip Title"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -107,28 +129,30 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_trip_pic" />
 
         <TextView
-            android:id="@+id/tv_trip_destination"
+            android:id="@+id/tv_start_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="45dp"
+            android:ellipsize="end"
             android:gravity="right"
-            android:text="Destination"
+            android:maxLength="15"
+            android:maxLines="1"
+            android:text="Start Location"
             android:textColor="@color/highlight_blue"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/tv_trip_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_trip_title"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintTop_toTopOf="@+id/tv_trip_title" />
 
         <ImageView
             android:id="@+id/iv_pin"
             android:layout_width="17dp"
             android:layout_height="0dp"
             android:layout_marginEnd="3dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_trip_destination"
-            app:layout_constraintEnd_toStartOf="@+id/tv_trip_destination"
-            app:layout_constraintTop_toTopOf="@+id/tv_trip_destination"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_start_location"
+            app:layout_constraintEnd_toStartOf="@+id/tv_start_location"
+            app:layout_constraintTop_toTopOf="@+id/tv_start_location"
             app:srcCompat="@drawable/pin" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -138,7 +162,7 @@
             android:layout_marginTop="40dp"
             android:clickable="true"
             android:scaleType="center"
-            app:backgroundTint="#E1E1E1"
+            app:backgroundTint="@android:color/transparent"
             app:elevation="0dp"
             app:fabCustomSize="25dp"
             app:fabSize="normal"
@@ -156,7 +180,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:clickable="true"
-            app:backgroundTint="#E1E1E1"
+            app:backgroundTint="@android:color/transparent"
             app:elevation="0dp"
             app:fabCustomSize="25dp"
             app:layout_constraintEnd_toEndOf="parent"

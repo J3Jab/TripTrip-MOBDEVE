@@ -38,7 +38,7 @@
         android:layout_marginTop="32dp"
         android:clickable="true"
         android:scaleType="center"
-        app:backgroundTint="#E1E1E1"
+        app:backgroundTint="#85252525"
         app:elevation="0dp"
         app:fabCustomSize="50dp"
         app:fabSize="normal"
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:maxImageSize="20dp"
         app:srcCompat="@drawable/edit"
-        app:tint="#656565" />
+        app:tint="#FFFFFF" />
 
     <TextView
         android:id="@+id/tv_view_bday"

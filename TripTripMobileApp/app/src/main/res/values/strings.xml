@@ -17,12 +17,17 @@
     <string name="input_confirm_password">Confirm Password</string>
     <string name="save">Save</string>
 
+    <string name="sort_trips_by">Sort trips by:</string>
+
     <string name="enter_title">Enter Trip Title</string>
     <string name="enter_start_date">Enter Start Date</string>
     <string name="enter_end_date">Enter End Date</string>
     <string name="enter_start_location">Enter Start Location</string>
     <string name="enter_end_location">Enter End Location</string>
+    <string name="select_trip_type">Select Trip Type:</string>
+    <string name="enter_description">Enter Trip Description</string>
     <string name="enter_create_trip">Create Trip</string>
+
     <string name="enter_new_password">Enter your new password:</string>
     <string name="enter_verify">Enter your birthday and email for verification:</string>
     <string name="verify">Verify</string>
@@ -32,5 +37,10 @@
         <item>Start Date</item>
         <item>End Date</item>
         <item>Destination</item>
+    </string-array>
+
+    <string-array name="type_options">
+        <item>Single Trip</item>
+        <item>Round Trip</item>
     </string-array>
 </resources>
