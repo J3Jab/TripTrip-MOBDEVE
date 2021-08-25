@@ -38,8 +38,8 @@ public class TripAdapter extends RecyclerView.Adapter<TripViewHolder> {
         holder.setTripTitle(dataTrips.get(position).getTripTitle());
         holder.setStartDate(dataTrips.get(position).getStartDate());
         holder.setEndDate(dataTrips.get(position).getEndDate());
-        holder.setDestination(dataTrips.get(position).getDestination());
-        holder.setTripType(dataTrips.get(position).getTripType());
+        holder.setDestination(dataTrips.get(position).getEndLocation());
+        holder.setTripType(dataTrips.get(position).getType());
     }
 
     @Override
