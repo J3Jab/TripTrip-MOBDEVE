@@ -2,8 +2,10 @@
 
 ### Views that have been added with layout and design: 
 - [activity_edit_profile.xml] activity view for edit profile
+- [activity_forgot_password.xml] activity view for forgot password verification
 - [activity_login.xml] activity view for user login
 - [activity_main.xml] activity view for main view, temporarily contains list of trips for easier testing
+- [activity_new_password.xml] activity view for creating new password after forgot password verification
 - [activity_register.xml] activity view for register account 
 - [activity_trips.xml] actual activity view for RecyclerView list of trips
 - [activity_view_profile.xml] activity view for view profile
