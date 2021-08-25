@@ -22,6 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        user = new User();
         name = (EditText) findViewById(R.id.et_register_name);
         birthday = (EditText) findViewById(R.id.et_register_bday);
         email = (EditText) findViewById(R.id.et_register_email);
