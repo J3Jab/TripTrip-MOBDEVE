@@ -23,6 +23,9 @@
     <string name="enter_start_location">Enter Start Location</string>
     <string name="enter_end_location">Enter End Location</string>
     <string name="enter_create_trip">Create Trip</string>
+    <string name="enter_new_password">Enter your new password:</string>
+    <string name="enter_verify">Enter your birthday and email for verification:</string>
+    <string name="verify">Verify</string>
 
     <!--  options for dropdown menu  -->
     <string-array name="sort_options">
