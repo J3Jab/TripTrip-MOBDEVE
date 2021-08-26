@@ -33,6 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_TRIP_STARTLOCATION = "trip_startlocation";
     private static final String COLUMN_TRIP_ENDLOCATION = "trip_endlocation";
     private static final String COLUMN_TRIP_TYPE = "trip_type";
+    private static final String COLUMN_TRIP_DESCRIP = "trip_description";
     private static final String COLUMN_TRIP_USEREMAIL = "trip_userEmail";
 
 
@@ -44,7 +45,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_TRIP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_TRIP_TITLE + " TEXT,"
             + COLUMN_TRIP_STARTDATE + " TEXT," + COLUMN_TRIP_ENDDATE + " TEXT,"
             + COLUMN_TRIP_STARTLOCATION + " TEXT," + COLUMN_TRIP_ENDLOCATION
-            + " TEXT," + COLUMN_TRIP_TYPE + " TEXT," + COLUMN_TRIP_USEREMAIL + " TEXT" + ")";
+            + " TEXT," + COLUMN_TRIP_TYPE + " TEXT," + COLUMN_TRIP_DESCRIP + " TEXT,"
+            + COLUMN_TRIP_USEREMAIL + " TEXT" + ")";
     // drop table sql query
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
     private String DROP_TRIP_TABLE = "DROP TABLE IF EXISTS " + TABLE_TRIP;
@@ -218,6 +220,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_TRIP_ENDDATE,
                 COLUMN_TRIP_STARTLOCATION,
                 COLUMN_TRIP_ENDLOCATION,
+                COLUMN_TRIP_TYPE,
+                COLUMN_TRIP_DESCRIP,
                 COLUMN_TRIP_USEREMAIL
         };
         Cursor cursor = db.rawQuery("Select trip_title, trip_startdate, trip_enddate, " +
@@ -230,7 +234,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 trip.setStartDate(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_STARTDATE)));
                 trip.setEndDate(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_ENDDATE)));
                 trip.setStartLocation(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_STARTLOCATION)));
-                trip.setEndDate(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_ENDLOCATION)));
+                trip.setEndLocation(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_ENDLOCATION)));
+                trip.setTripType(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_TYPE)));
+                trip.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_DESCRIP)));
                 trips.add(trip);
             }while(cursor.moveToNext());
 
@@ -253,7 +259,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_TRIP_ENDDATE, trip.getEndDate());
         values.put(COLUMN_TRIP_STARTLOCATION, trip.getStartLocation());
         values.put(COLUMN_TRIP_ENDLOCATION, trip.getEndLocation());
-        values.put(COLUMN_TRIP_TYPE, trip.getType());
+        values.put(COLUMN_TRIP_TYPE, trip.getTripType());
+        values.put(COLUMN_TRIP_DESCRIP, trip.getDescription());
         // updating row
         db.update(TABLE_TRIP, values, COLUMN_TRIP_ID + " = ?",
                 new String[]{String.valueOf(trip.getId())});
@@ -265,7 +272,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *
      * @param trip
      */
-    public void deleteUser(Trip trip) {
+    public void deleteTrip(Trip trip) {
         SQLiteDatabase db = this.getWritableDatabase();
         // delete trip record by id
         db.delete(TABLE_TRIP, COLUMN_TRIP_ID + " = ?",
