@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     EditText email, password;
     Button register, login;
     DatabaseHelper db;
+    public static final String KEY_CURR_USER = "KEY_CURR_USER";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                     if(checkuserpass){
                         Toast.makeText(MainActivity.this, "Sign in successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), TripsActivity.class);
+                        intent.putExtra(KEY_CURR_USER, user_email);
                         startActivity(intent);
                     }
                     else{
