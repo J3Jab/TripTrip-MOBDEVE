@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     EditText email, password;
-    Button register, login;
+    Button register, login, forgotPass;
     DatabaseHelper db;
     public static final String KEY_CURR_USER = "KEY_CURR_USER";
     @Override
@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         login = (Button) findViewById(R.id.btn_login);
         register = (Button) findViewById(R.id.btn_register_account);
+        forgotPass = (Button) findViewById(R.id.btn_forgot_password);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +63,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ForgotPasswordActivity.class);
                 startActivity(intent);
             }
         });
