@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -70,5 +73,31 @@ public class TripsActivity extends AppCompatActivity {
 
         arrayAdapter.setDropDownViewResource(R.layout.item_dropdown);
         dropdown.setAdapter(arrayAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.item_view_profile:
+                Intent view = new Intent(TripsActivity.this, ViewProfileActivity.class);
+                startActivity(view);
+                break;
+            case R.id.item_edit_profile:
+                Intent edit = new Intent(TripsActivity.this, EditProfileActivity.class);
+                startActivity(edit);
+                break;
+            case R.id.item_logout:
+                Intent logout = new Intent(TripsActivity.this, MainActivity.class);
+                startActivity(logout);
+                break;
+        }
+        return true;
     }
 }
