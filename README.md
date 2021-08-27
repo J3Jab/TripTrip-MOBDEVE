@@ -53,8 +53,8 @@
 - Retrieve user profile details and display them on view profile activity
 - Google Maps API for adding and editing a trip
 - Camera API for adding an image to a planned trip
-- Adding a trip to the database
-- Removing a trip from the database
+- Adding a trip to the database and activities
+- Removing a trip from the database and activities
 - Changing trip details in the database according to inputs from the edit trip activity
 - Changing user details in the database according to inputs from the edit profile activity
 - Retrieve trip details from the database and display trip title, start and end dates, start and end location on a trip item in the RecyclerView list of trips
