@@ -166,14 +166,32 @@
 
     <Button
         android:id="@+id/btn_edit_trip"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:backgroundTint="@color/yellow_green"
         android:text="@string/save"
         android:textColor="@color/btn_text_blue"
         app:layout_constraintBottom_toBottomOf="@+id/tv_edit_trip_bg"
         app:layout_constraintEnd_toEndOf="@+id/et_edit_end_location"
         app:layout_constraintStart_toStartOf="@+id/et_edit_end_location"
-        app:layout_constraintTop_toBottomOf="@+id/et_edit_description" />
+        app:layout_constraintTop_toBottomOf="@+id/et_edit_description"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <Button
+        android:id="@+id/btn_edit_trip_delete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/delete_red"
+        android:text="@string/delete_trip"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_edit_trip_bg"
+        app:layout_constraintEnd_toEndOf="@+id/et_edit_end_location"
+        app:layout_constraintStart_toStartOf="@+id/et_edit_end_location"
+        app:layout_constraintTop_toBottomOf="@+id/btn_edit_trip"
+        app:layout_constraintVertical_bias="0.15" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
