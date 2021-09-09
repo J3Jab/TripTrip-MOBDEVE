@@ -17,6 +17,23 @@
         app:layout_constraintVertical_bias="0.635"
         app:srcCompat="@drawable/mountains" />
 
+    <TextView
+        android:id="@+id/tv_empty_trips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/no_trips"
+        android:textAlignment="center"
+        android:textColor="#B4FFFFFF"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rv_trips"
+        app:layout_constraintVertical_bias="0.3" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_trips"
         android:layout_width="match_parent"
@@ -94,22 +111,5 @@
         app:layout_constraintVertical_bias="0.444"
         app:srcCompat="@drawable/plus"
         app:tint="@color/white" />
-
-    <TextView
-        android:id="@+id/tv_empty_trips2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:text="@string/no_trips"
-        android:textAlignment="center"
-        android:textColor="#B4FFFFFF"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rv_trips"
-        app:layout_constraintVertical_bias="0.3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

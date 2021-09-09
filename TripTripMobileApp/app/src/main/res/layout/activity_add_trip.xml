@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.633"
+        app:layout_constraintVertical_bias="0.629"
         app:srcCompat="@drawable/mountains" />
 
     <TextView
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_add_type_label">>
 
         <Spinner
-            android:id="@+id/dropdown_trip_type"
+            android:id="@+id/dropdown_add_trip_type"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="0dp"
@@ -73,9 +73,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:backgroundTint="#FFFFFF"
+        android:editable="false"
         android:ems="10"
-        android:hint="@string/enter_start_date"
-        android:inputType="date"
+        android:hint="@string/select_start_date"
+        android:inputType="none"
         android:textColor="@color/white"
         android:textColorHint="@color/hint_gray"
         app:layout_constraintEnd_toEndOf="@+id/et_add_trip_title"
@@ -88,9 +89,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:backgroundTint="#FFFFFF"
+        android:editable="false"
         android:ems="10"
-        android:hint="@string/enter_end_date"
-        android:inputType="date"
+        android:hint="@string/select_end_date"
         android:textColor="@color/white"
         android:textColorHint="@color/hint_gray"
         app:layout_constraintEnd_toEndOf="@+id/et_add_start_date"
@@ -101,9 +102,9 @@
         android:id="@+id/et_add_trip_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="80dp"
-        android:layout_marginEnd="65dp"
+        android:layout_marginEnd="60dp"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:hint="@string/enter_title"
@@ -155,7 +156,7 @@
         android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:hint="@string/enter_description"
-        android:inputType="textLongMessage"
+        android:inputType="textMultiLine"
         android:maxLength="50"
         android:textColor="@color/white"
         android:textColorHint="@color/hint_gray"
