@@ -51,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), TripsActivity.class);
                         intent.putExtra(KEY_CURR_USER, user_email);
                         startActivity(intent);
+
+                        //prevents user from returning to login activity
+                        finish();
                     }
                     else{
                         Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();

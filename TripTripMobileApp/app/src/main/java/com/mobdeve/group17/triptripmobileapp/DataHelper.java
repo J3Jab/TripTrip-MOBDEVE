@@ -12,26 +12,32 @@ public class DataHelper {
         trips.add(new Trip(
                 R.drawable.mountains,
                 "Nice Trip!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
-                "08/23/21",
-                "08/23/21",
+                "08/23/2021",
+                "08/23/2021",
                 "Philippines",
-                "Philippines"));
+                "Philippines",
+                "Single",
+                ""));
 
         trips.add(new Trip(
                 0, // no image set
                 "Nice Trip",
-                "08/23/21",
-                "08/23/21",
+                "08/23/2021",
+                "08/23/2021",
                 "Philippines",
-                "Japan"));
+                "Japan",
+                "Round",
+                ""));
 
         trips.add(new Trip(
                 R.drawable.mountains,
                 "Nice Trip",
-                "08/23/21",
-                "08/23/21",
+                "08/23/2021",
+                "08/23/2021",
                 "Philippines",
-                "The Moon"));
+                "The Moon",
+                "Round",
+                ""));
         return trips;
     }
 }

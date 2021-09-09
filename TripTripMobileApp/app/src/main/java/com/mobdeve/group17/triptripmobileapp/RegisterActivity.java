@@ -2,12 +2,16 @@ package com.mobdeve.group17.triptripmobileapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -31,6 +35,9 @@ public class RegisterActivity extends AppCompatActivity {
         db = new DatabaseHelper(this);
 
         register = (Button) findViewById(R.id.btn_register);
+
+        //initializes date picker for bday
+        initDatePickerDialog();
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,5 +76,34 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void initDatePickerDialog(){
+        Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        birthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        RegisterActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int day) {
+                        month++; //month value starts at 0, so adding 1 will set it at Jan
+                        String date = String.format("%02d", month) + "/" + String.format("%02d", day) + "/" + year;
+
+                        birthday.setText(date);
+                    }
+                }, year, month, day);
+
+                //disables future dates
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+                datePickerDialog.show();
+            }
+        });
+
     }
 }
