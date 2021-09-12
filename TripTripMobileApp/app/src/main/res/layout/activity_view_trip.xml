@@ -7,4 +7,226 @@
     android:layout_height="match_parent"
     tools:context=".ViewTripActivity">
 
+  <ImageView
+      android:id="@+id/iv_view_trip_mountains"
+      android:layout_width="1666dp"
+      android:layout_height="1468dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.635"
+      app:srcCompat="@drawable/mountains" />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginStart="25dp"
+      android:layout_marginTop="25dp"
+      android:layout_marginEnd="25dp"
+      android:layout_marginBottom="25dp"
+      android:background="@drawable/trip_box"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_view_trip_pic"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="30dp"
+        android:background="#00FFFFFF"
+        android:scaleType="centerCrop"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:shapeAppearanceOverlay="@style/round_corners"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/tv_view_start_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
+        android:text="08/23/2021"
+        android:textColor="@color/highlight_blue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tv_view_trip_hyphen"
+        app:layout_constraintTop_toBottomOf="@+id/tv_view_trip_title" />
+
+    <TextView
+        android:id="@+id/tv_view_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="30dp"
+        android:maxLength="50"
+        android:text="The scorpion wants to get across the river, so he asks the frog to carry him across. But the frog's like, &quot;Well, what's in it for me?&quot;"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_view_description_label" />
+
+    <TextView
+        android:id="@+id/tv_view_trip_hyphen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:textColor="@color/highlight_blue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_view_start_date"
+        app:layout_constraintEnd_toEndOf="@+id/tv_view_trip_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_view_trip_title"
+        app:layout_constraintTop_toTopOf="@+id/tv_view_start_date"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tv_view_end_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="08/23/2021"
+        android:textColor="@color/highlight_blue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/tv_view_trip_hyphen"
+        app:layout_constraintTop_toTopOf="@+id/tv_view_trip_hyphen" />
+
+    <TextView
+        android:id="@+id/tv_view_start_location_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/start_location"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tv_view_trip_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_view_trip_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_view_start_date" />
+
+    <TextView
+        android:id="@+id/tv_view_end_location_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/end_location"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tv_view_trip_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_view_trip_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_view_start_location" />
+
+    <TextView
+        android:id="@+id/tv_view_description_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/description"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tv_view_trip_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_view_trip_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_view_end_location" />
+
+    <TextView
+        android:id="@+id/tv_view_end_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:maxLength="50"
+        android:maxLines="1"
+        android:text="@string/end_location"
+        android:textColor="@color/highlight_blue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/tv_view_trip_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_view_trip_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_view_end_location_label" />
+
+    <TextView
+        android:id="@+id/tv_trip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Trip"
+        android:textColor="@color/highlight_blue"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_view_end_date"
+        app:layout_constraintEnd_toEndOf="@+id/tv_view_start_location"
+        app:layout_constraintTop_toBottomOf="@+id/tv_view_start_location"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btn_view_delete_trip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/delete_red"
+        android:text="@string/delete_trip"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/btn_view_edit_trip"
+        app:layout_constraintStart_toStartOf="@+id/btn_view_edit_trip"
+        app:layout_constraintTop_toBottomOf="@+id/btn_view_edit_trip" />
+
+    <Button
+        android:id="@+id/btn_view_edit_trip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/yellow_green"
+        android:text="@string/edit_trip"
+        android:textColor="@color/btn_text_blue"
+        app:layout_constraintEnd_toEndOf="@+id/iv_view_trip_pic"
+        app:layout_constraintStart_toStartOf="@+id/iv_view_trip_pic"
+        app:layout_constraintTop_toBottomOf="@+id/tv_view_description" />
+
+    <TextView
+        android:id="@+id/tv_view_trip_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ellipsize="end"
+        android:maxLength="10"
+        android:maxLines="2"
+        android:scrollHorizontally="true"
+        android:singleLine="false"
+        android:text="Trip Title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/iv_view_trip_pic"
+        app:layout_constraintStart_toStartOf="@+id/iv_view_trip_pic"
+        app:layout_constraintTop_toBottomOf="@+id/iv_view_trip_pic" />
+
+    <TextView
+        android:id="@+id/tv_view_start_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:ellipsize="end"
+        android:gravity="right"
+        android:maxLength="50"
+        android:maxLines="1"
+        android:text="@string/start_location"
+        android:textColor="@color/highlight_blue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tv_view_trip_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_view_trip_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_view_start_location_label" />
+
   </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
