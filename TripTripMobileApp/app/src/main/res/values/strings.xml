@@ -9,8 +9,13 @@
     <string name="no_accnt">No Account?</string>
     <string name="view_profile">View Profile</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="edit_trip">Edit Trip</string>
 
     <string name="no_trips">You have no trips planned yet.</string>
+
+    <string name="start_location">Start Location</string>
+    <string name="end_location">End Location</string>
+    <string name="description">Description</string>
 
     <string name="input_name">Name</string>
     <string name="input_birthday">Birthday</string>
@@ -21,11 +26,11 @@
     <string name="delete_profile">Delete Profile</string>
 
     <string name="sort_trips_by">Sort trips by:</string>
-    <string name="select_date">Double-tap to Select Date</string>
+    <string name="select_date">Select Date</string>
 
     <string name="enter_title">Enter Trip Title</string>
-    <string name="select_start_date">Double-tap to Select Start Date</string>
-    <string name="select_end_date">Double-tap to Select End Date</string>
+    <string name="select_start_date">Select Start Date</string>
+    <string name="select_end_date">Select End Date</string>
     <string name="enter_start_location">Enter Start Location</string>
     <string name="enter_end_location">Enter End Location</string>
     <string name="select_trip_type">Select Trip Type:</string>
