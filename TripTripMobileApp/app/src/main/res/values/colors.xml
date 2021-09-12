@@ -17,6 +17,7 @@
     <color name="menu_blue">#BC06305C</color>
     <color name="menu_black">#A4000000</color>
     <color name="btn_black">#85252525</color>
+    <color name="image_black">#52000000</color>
     <color name="gray">#A8A8A8</color>
     <color name="hint_gray">#D5D5D5</color>
     <color name="delete_red">#F35757</color>
