@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
     Button register, login, forgotPass;
     DatabaseHelper db;
     public static final String KEY_CURR_USER = "KEY_CURR_USER";
+
+    private static final String TAG = "MainActivity";
+    private static final int ERROR_DIALOG_REQUEST = 9001;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +86,47 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //disables login button if user does not have the correct Google Services version
+        if(!isServicesOk()){
+            login.setEnabled(false);
+        }
+        else{
+            login.setEnabled(true);
+        }
+    }
+
+    /**
+     * checks if user's device has the correct Google Services version
+     * @return true if Google Services version is ok, false if not
+     */
+    public boolean isServicesOk(){
+        //log message for checking and debugging
+        Log.d(TAG, "isServicesOk: checking google services version");
+
+        int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(MainActivity.this);
+
+        // if ok and user can make map requests
+        if(available== ConnectionResult.SUCCESS){
+            Log.d(TAG, "isServicesOk: Google Play Services working");
+
+            return true;
+        }
+
+        //if an error occurs but is resolvable
+        else if(GoogleApiAvailability.getInstance().isUserResolvableError(available)){
+            Log.d(TAG, "isServicesOk: error occurred but fixable");
+            Toast.makeText(this, "An error occurred with your current Google Services version.", Toast.LENGTH_SHORT).show();
+
+            Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MainActivity.this, available, ERROR_DIALOG_REQUEST);
+            dialog.show();
+        }
+
+        //if error occurs and is not resolvable
+        else{
+            Toast.makeText(this, "Map requests can't be made for this app. Please update your Google Services version.", Toast.LENGTH_SHORT).show();
+        }
+
+        return false;
     }
 
 

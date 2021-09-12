@@ -88,6 +88,9 @@ public class AddTripActivity extends AppCompatActivity {
         this.etStartDate = findViewById(R.id.et_add_start_date);
         this.etEndDate = findViewById(R.id.et_add_end_date);
 
+        etStartDate.setFocusable(false);
+        etEndDate.setFocusable(false);
+
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);

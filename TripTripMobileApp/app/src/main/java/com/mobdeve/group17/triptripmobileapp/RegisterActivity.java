@@ -84,6 +84,8 @@ public class RegisterActivity extends AppCompatActivity {
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
+        birthday.setFocusable(false);
+
         birthday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
