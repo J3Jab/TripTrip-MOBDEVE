@@ -30,6 +30,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
+    <TextView
+        android:id="@+id/tv_add_trip_image_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_trip_image"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_add_trip_image"
+        app:layout_constraintEnd_toEndOf="@+id/iv_add_trip_image"
+        app:layout_constraintStart_toStartOf="@+id/iv_add_trip_image"
+        app:layout_constraintTop_toTopOf="@+id/iv_add_trip_image" />
+
     <RelativeLayout
         android:id="@+id/rl_add_dropdown_container"
         android:layout_width="0dp"
@@ -103,7 +115,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="60dp"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
@@ -171,12 +183,44 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="@color/yellow_green"
         android:text="@string/enter_create_trip"
         android:textColor="@color/btn_text_blue"
         app:layout_constraintBottom_toBottomOf="@+id/tv_add_bg"
         app:layout_constraintEnd_toEndOf="@+id/et_add_end_location"
-        app:layout_constraintStart_toStartOf="@+id/et_add_end_location"
-        app:layout_constraintTop_toBottomOf="@+id/et_add_description" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/et_add_end_location" />
+
+    <ImageView
+        android:id="@+id/iv_add_trip_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/btn_create_trip"
+        app:layout_constraintEnd_toEndOf="@+id/et_add_description"
+        app:layout_constraintStart_toStartOf="@+id/et_add_description"
+        app:layout_constraintTop_toBottomOf="@+id/et_add_description"
+        app:srcCompat="@drawable/places_autocomplete_toolbar_shadow" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_trip_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:clickable="true"
+        android:scaleType="center"
+        app:backgroundTint="#85252525"
+        app:elevation="0dp"
+        app:fabCustomSize="40dp"
+        app:fabSize="normal"
+        app:layout_constraintEnd_toEndOf="@+id/iv_add_trip_image"
+        app:layout_constraintTop_toTopOf="@+id/iv_add_trip_image"
+        app:maxImageSize="15dp"
+        app:srcCompat="@drawable/plus"
+        app:tint="#FFFFFF" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
