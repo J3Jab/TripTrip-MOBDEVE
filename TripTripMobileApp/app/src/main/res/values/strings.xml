@@ -35,6 +35,7 @@
     <string name="enter_end_location">Enter End Location</string>
     <string name="select_trip_type">Select Trip Type:</string>
     <string name="enter_description">Enter Trip Description (Optional)</string>
+    <string name="add_trip_image">Add Trip Image (Optional)</string>
     <string name="enter_create_trip">Create Trip</string>
     <string name="delete_trip">Delete Trip</string>
 
