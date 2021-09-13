@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.mobdeve.group17.triptripmobileapp.utils.PreferenceUtils;
 
 import java.util.ArrayList;
 
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     EditText email, password;
     Button register, login, forgotPass;
     DatabaseHelper db;
-    public static final String KEY_CURR_USER = "KEY_CURR_USER";
 
     private static final String TAG = "MainActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
@@ -55,13 +55,18 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     Boolean checkuserpass = db.checkUserEmailPassword(user_email, user_password);
                     if(checkuserpass){
+                        User user = db.getUser(user_email);
+                        //SharedPreferences
+                        PreferenceUtils.saveEmail(user.getEmail(), MainActivity.this);
+                        PreferenceUtils.savePassword(user.getPassword(), MainActivity.this);
+                        PreferenceUtils.saveName(user.getName(), MainActivity.this);
+                        PreferenceUtils.saveBirthday(user.getBirthday(), MainActivity.this);
                         Toast.makeText(MainActivity.this, "Sign in successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), TripsActivity.class);
-                        intent.putExtra(KEY_CURR_USER, user_email);
                         startActivity(intent);
 
                         //prevents user from returning to login activity
-                        finish();
+                        //finish();
                     }
                     else{
                         Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();

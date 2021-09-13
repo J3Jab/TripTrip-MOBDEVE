@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.mobdeve.group17.triptripmobileapp.utils.PreferenceUtils;
 
 import java.util.Calendar;
 
@@ -20,10 +23,13 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     Button verify;
 
+    DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
+
+        db = new DatabaseHelper(this);
 
         initDatePickerDialog();
         etEmail = findViewById(R.id.et_forgot_email);
@@ -33,8 +39,30 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), NewPasswordActivity.class);
-                startActivity(intent);
+                String user_email = etEmail.getText().toString().trim();
+                String user_bday = etBday.getText().toString().trim();
+
+                if(user_email.equals("") || user_bday.equals(""))
+                    Toast.makeText(ForgotPasswordActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
+                else{
+                    Boolean checkuser = db.checkUserEmail(user_email);
+                    if(checkuser){
+                        User user = db.getUser_emailBirthday(user_email, user_bday);
+                        //SharedPreferences
+                        PreferenceUtils.saveEmail(user.getEmail(), ForgotPasswordActivity.this);
+                        PreferenceUtils.savePassword(user.getPassword(), ForgotPasswordActivity.this);
+                        PreferenceUtils.saveName(user.getName(), ForgotPasswordActivity.this);
+                        PreferenceUtils.saveBirthday(user.getBirthday(), ForgotPasswordActivity.this);
+
+                        Toast.makeText(ForgotPasswordActivity.this, "User found", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), NewPasswordActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else{
+                        Toast.makeText(ForgotPasswordActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 

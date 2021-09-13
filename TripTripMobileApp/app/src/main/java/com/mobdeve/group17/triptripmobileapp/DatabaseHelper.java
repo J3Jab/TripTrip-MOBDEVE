@@ -41,12 +41,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USER + "("
             + COLUMN_USER_EMAIL + " TEXT" + " primary key," + COLUMN_USER_NAME + " TEXT,"
             + COLUMN_USER_BDAY + " TEXT," + COLUMN_USER_PASSWORD + " TEXT" + ")";
+
     private String CREATE_TRIP_TABLE = "CREATE TABLE " + TABLE_TRIP + "("
             + COLUMN_TRIP_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_TRIP_TITLE + " TEXT,"
             + COLUMN_TRIP_STARTDATE + " TEXT," + COLUMN_TRIP_ENDDATE + " TEXT,"
             + COLUMN_TRIP_STARTLOCATION + " TEXT," + COLUMN_TRIP_ENDLOCATION
             + " TEXT," + COLUMN_TRIP_TYPE + " TEXT," + COLUMN_TRIP_DESCRIP + " TEXT,"
             + COLUMN_TRIP_USEREMAIL + " TEXT" + ")";
+
     // drop table sql query
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
     private String DROP_TRIP_TABLE = "DROP TABLE IF EXISTS " + TABLE_TRIP;
@@ -96,13 +98,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return user
      */
     public User getUser(String email) {
-        // array of columns to fetch
-        String[] columns = {
-                COLUMN_USER_EMAIL,
-                COLUMN_USER_NAME,
-                COLUMN_USER_BDAY,
-                COLUMN_USER_PASSWORD
-        };
         SQLiteDatabase db = this.getReadableDatabase();
         // query the user table
         Cursor cursor = db.rawQuery("Select * from user where user_email = ?", new String[] {email});
@@ -157,6 +152,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
+    /**
+     * This method is to find a user using email and birthday
+     */
+
+    public User getUser_emailBirthday(String email, String bday) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        // query the user table
+        Cursor cursor = db.rawQuery("Select * from user where user_email = ? and user_bday = ?", new String[] {email, bday});
+        User user = new User();
+        // Traversing through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            user.setBirthday(cursor.getString(cursor.getColumnIndex(COLUMN_USER_BDAY)));
+            user.setName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)));
+            user.setEmail(cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAIL)));
+            user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
+        }
+        cursor.close();
+        db.close();
+        // return user
+        return user;
+    }
+
     /**
      * This method is to update user record
      *
@@ -166,6 +184,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_USER_NAME, user.getName());
+        values.put(COLUMN_USER_BDAY, user.getBirthday());
         values.put(COLUMN_USER_EMAIL, user.getEmail());
         values.put(COLUMN_USER_PASSWORD, user.getPassword());
         // updating row

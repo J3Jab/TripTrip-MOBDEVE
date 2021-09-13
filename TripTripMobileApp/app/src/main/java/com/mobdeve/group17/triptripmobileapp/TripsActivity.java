@@ -36,8 +36,6 @@ public class TripsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_trips);
         initDropdown();
         initRecyclerView();
-        Intent intent = getIntent();
-        String curr_user = intent.getStringExtra(MainActivity.KEY_CURR_USER);
     }
 
     public void initRecyclerView() {
@@ -88,14 +86,17 @@ public class TripsActivity extends AppCompatActivity {
             case R.id.item_view_profile:
                 Intent view = new Intent(TripsActivity.this, ViewProfileActivity.class);
                 startActivity(view);
+                finish();
                 break;
             case R.id.item_edit_profile:
                 Intent edit = new Intent(TripsActivity.this, EditProfileActivity.class);
                 startActivity(edit);
+                finish();
                 break;
             case R.id.item_logout:
                 Intent logout = new Intent(TripsActivity.this, MainActivity.class);
                 startActivity(logout);
+                finish();
                 break;
         }
         return true;
