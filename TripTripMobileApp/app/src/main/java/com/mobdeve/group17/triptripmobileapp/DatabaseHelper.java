@@ -228,38 +228,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
-    public List<Trip> getTripsByUser(String email) {
+    public ArrayList<Trip> getTripsByUser(String email) {
 
-        List<Trip> trips = new ArrayList<Trip>();
+        ArrayList<Trip> trips = new ArrayList<Trip>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {
-                COLUMN_TRIP_ID,
-                COLUMN_TRIP_TITLE,
-                COLUMN_TRIP_STARTDATE,
-                COLUMN_TRIP_ENDDATE,
-                COLUMN_TRIP_STARTLOCATION,
-                COLUMN_TRIP_ENDLOCATION,
-                COLUMN_TRIP_TYPE,
-                COLUMN_TRIP_DESCRIP,
-                COLUMN_TRIP_USEREMAIL
-        };
-        Cursor cursor = db.rawQuery("Select trip_title, trip_startdate, trip_enddate, " +
-                "trip_startlocation, trip_endlocation from trip where user_email = ? order by trip_id"
+        Cursor cursor = db.rawQuery("Select * from trip where trip_userEmail = ? order by trip_id"
                 ,new String[]{email});
-        if(cursor.moveToFirst()) {
-            do{
-                Trip trip = new Trip();
-                trip.setTripTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_TITLE)));
-                trip.setStartDate(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_STARTDATE)));
-                trip.setEndDate(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_ENDDATE)));
-                trip.setStartLocation(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_STARTLOCATION)));
-                trip.setEndLocation(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_ENDLOCATION)));
-                trip.setTripType(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_TYPE)));
-                trip.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_DESCRIP)));
-                trips.add(trip);
-            }while(cursor.moveToNext());
+        if(cursor != null){
+            if(cursor.moveToFirst()) {
+                do{
+                    Trip trip = new Trip();
+                    trip.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_ID))));
+                    trip.setTripTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_TITLE)));
+                    trip.setStartDate(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_STARTDATE)));
+                    trip.setEndDate(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_ENDDATE)));
+                    trip.setStartLocation(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_STARTLOCATION)));
+                    trip.setEndLocation(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_ENDLOCATION)));
+                    trip.setTripType(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_TYPE)));
+                    trip.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_DESCRIP)));
+                    trips.add(trip);
+                }while(cursor.moveToNext());
 
+            }
         }
+
         cursor.close();
         db.close();
         return trips;

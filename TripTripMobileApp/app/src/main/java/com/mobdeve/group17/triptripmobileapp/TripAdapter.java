@@ -1,5 +1,6 @@
 package com.mobdeve.group17.triptripmobileapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,8 +20,10 @@ public class TripAdapter extends RecyclerView.Adapter<TripViewHolder> {
 
     private ArrayList<Trip> dataTrips;
     private FloatingActionButton fabEdit;
+    private Context context;
 
-    public TripAdapter(ArrayList<Trip> dataTrips){
+    public TripAdapter(ArrayList<Trip> dataTrips, Context context){
+        this.context = context;
         this.dataTrips = dataTrips;
     }
 
@@ -57,5 +60,10 @@ public class TripAdapter extends RecyclerView.Adapter<TripViewHolder> {
     @Override
     public int getItemCount() {
         return this.dataTrips.size();
+    }
+
+    public void setData(ArrayList<Trip> data){
+        this.dataTrips = data;
+        notifyDataSetChanged();
     }
 }

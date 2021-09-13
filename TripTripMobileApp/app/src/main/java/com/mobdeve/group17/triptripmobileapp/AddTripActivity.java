@@ -15,6 +15,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mobdeve.group17.triptripmobileapp.utils.PreferenceUtils;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -33,6 +35,8 @@ public class AddTripActivity extends AppCompatActivity {
 
     Button save;
 
+    DatabaseHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,8 @@ public class AddTripActivity extends AppCompatActivity {
 
         //initialize trip type dropdown
         initDropdown();
+
+        db = new DatabaseHelper(this);
 
         this.save = findViewById(R.id.btn_create_trip);
         this.save.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +81,21 @@ public class AddTripActivity extends AppCompatActivity {
 //                }
 
                 else{
+                    Trip trip = new Trip();
+
+                    trip.setTripTitle(trip_title);
+                    trip.setStartDate(start_date);
+                    trip.setEndDate(end_date);
+                    trip.setStartLocation(start_location);
+                    trip.setEndLocation(end_location);
+                    trip.setTripType(trip_type);
+
+                    if(trip_description.isEmpty())
+                        trip.setDescription(null);
+                    else
+                        trip.setDescription(trip_description);
+
+                    db.addTrip(trip, PreferenceUtils.getEmail(AddTripActivity.this));
                     Intent intent = new Intent(AddTripActivity.this, TripsActivity.class);
                     startActivity(intent);
                     finish();

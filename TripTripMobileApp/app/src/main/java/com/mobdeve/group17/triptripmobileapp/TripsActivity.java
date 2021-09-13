@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mobdeve.group17.triptripmobileapp.utils.PreferenceUtils;
 
 import java.util.ArrayList;
 
@@ -30,6 +31,7 @@ public class TripsActivity extends AppCompatActivity {
     private TripAdapter adapter;
     private FloatingActionButton fabAdd, fabEdit;
 
+    DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,13 +41,15 @@ public class TripsActivity extends AppCompatActivity {
     }
 
     public void initRecyclerView() {
+        db = new DatabaseHelper(this);
         this.rv_trips = findViewById(R.id.rv_trips);
-        this.dataTrips = new DataHelper().getTrips();
+        //this.dataTrips = new DataHelper().getTrips();
+        this.dataTrips = db.getTripsByUser(PreferenceUtils.getEmail(this));
 
         this.layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         this.rv_trips.setLayoutManager(this.layoutManager);
 
-        this.adapter = new TripAdapter(this.dataTrips);
+        this.adapter = new TripAdapter(this.dataTrips, this);
         this.rv_trips.setAdapter(this.adapter);
 
         this.fabAdd = findViewById(R.id.fab_add_trip);
@@ -54,6 +58,7 @@ public class TripsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(TripsActivity.this, AddTripActivity.class);
                 startActivity(intent);
+                adapter.setData(db.getTripsByUser(PreferenceUtils.getEmail(TripsActivity.this)));
             }
         });
 
