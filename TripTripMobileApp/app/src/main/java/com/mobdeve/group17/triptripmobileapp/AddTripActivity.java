@@ -1,8 +1,10 @@
 package com.mobdeve.group17.triptripmobileapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -197,7 +199,27 @@ public class AddTripActivity extends AppCompatActivity {
         type_dropdown.setAdapter(arrayAdapter);
     }
 
-//    public boolean validDates(String start, String end){
+    @Override
+    public void onBackPressed() {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Cancel Adding Trip")
+                .setMessage("Would you like to cancel adding a trip?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // delete
+                        AddTripActivity.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // user doesn't want to delete
+                    }
+                })
+                .show();
+    }
+
+    //    public boolean validDates(String start, String end){
 //        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
 //        Date startDate = null;
 //        Date endDate = null;

@@ -312,13 +312,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         /**
      * This method is to delete trip record
      *
-     * @param trip
+     * @param tripID
      */
-    public void deleteTrip(Trip trip) {
+    public void deleteTrip(int tripID) {
         SQLiteDatabase db = this.getWritableDatabase();
         // delete trip record by id
         db.delete(TABLE_TRIP, COLUMN_TRIP_ID + " = ?",
-                new String[]{String.valueOf(trip.getId())});
+                new String[]{String.valueOf(tripID)});
         db.close();
     }
 }

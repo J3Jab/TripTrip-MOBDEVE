@@ -1,10 +1,12 @@
 package com.mobdeve.group17.triptripmobileapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                         PreferenceUtils.savePassword(user.getPassword(), MainActivity.this);
                         PreferenceUtils.saveName(user.getName(), MainActivity.this);
                         PreferenceUtils.saveBirthday(user.getBirthday(), MainActivity.this);
+
                         Toast.makeText(MainActivity.this, "Sign in successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), TripsActivity.class);
                         startActivity(intent);
@@ -134,5 +137,21 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Would you like to exit the app?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.super.onBackPressed();
 
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .show();
+    }
 }

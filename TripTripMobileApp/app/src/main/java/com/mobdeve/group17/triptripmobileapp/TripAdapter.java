@@ -1,6 +1,7 @@
 package com.mobdeve.group17.triptripmobileapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -23,6 +25,8 @@ public class TripAdapter extends RecyclerView.Adapter<TripViewHolder> {
     private FloatingActionButton fabEdit;
     private Context context;
 
+    DatabaseHelper db;
+
     public TripAdapter(ArrayList<Trip> dataTrips, Context context){
         this.context = context;
         this.dataTrips = dataTrips;
@@ -37,12 +41,38 @@ public class TripAdapter extends RecyclerView.Adapter<TripViewHolder> {
 
         TripViewHolder viewHolder = new TripViewHolder(view);
 
+        db = new DatabaseHelper(parent.getContext());
+
         view.findViewById(R.id.fab_edit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PreferenceUtils.saveTripId(dataTrips.get(viewHolder.getBindingAdapterPosition()).getId(), parent.getContext());
                 Intent intent = new Intent(v.getContext(), EditTripActivity.class);
                 v.getContext().startActivity(intent);
+            }
+        });
+
+        view.findViewById(R.id.fab_delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(parent.getContext())
+                        .setTitle("Delete")
+                        .setMessage("Would you like to delete this trip?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // delete
+                                db.deleteTrip(dataTrips.get(viewHolder.getBindingAdapterPosition()).getId());
+                                dataTrips.remove(viewHolder.getBindingAdapterPosition());
+                                notifyDataSetChanged();
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // user doesn't want to delete
+                            }
+                        })
+                        .show();
             }
         });
 

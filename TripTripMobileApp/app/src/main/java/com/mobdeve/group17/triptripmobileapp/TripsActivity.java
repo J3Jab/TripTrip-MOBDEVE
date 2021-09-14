@@ -5,10 +5,12 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -91,19 +93,38 @@ public class TripsActivity extends AppCompatActivity {
             case R.id.item_view_profile:
                 Intent view = new Intent(TripsActivity.this, ViewProfileActivity.class);
                 startActivity(view);
-                finish();
                 break;
             case R.id.item_edit_profile:
                 Intent edit = new Intent(TripsActivity.this, EditProfileActivity.class);
                 startActivity(edit);
-                finish();
                 break;
             case R.id.item_logout:
                 Intent logout = new Intent(TripsActivity.this, MainActivity.class);
                 startActivity(logout);
-                finish();
                 break;
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Logout")
+                .setMessage("Would you like to logout?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // delete
+                        Intent intent = new Intent(TripsActivity.this, MainActivity.class);
+                        finish();
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // user doesn't want to delete
+                    }
+                })
+                .show();
     }
 }
