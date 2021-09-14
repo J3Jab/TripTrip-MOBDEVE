@@ -21,6 +21,7 @@
     <string name="input_birthday">Birthday</string>
     <string name="input_email">E-mail</string>
     <string name="input_password">Password</string>
+    <string name="input_new_password">New Password</string>
     <string name="input_confirm_password">Confirm Password</string>
     <string name="save">Save</string>
     <string name="delete_profile">Delete Profile</string>

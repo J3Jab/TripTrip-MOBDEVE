@@ -51,7 +51,7 @@ public class PreferenceUtils {
     public static boolean saveBirthday(String birthday, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor prefsEditor = prefs.edit();
-        prefsEditor.putString(Constants.KEY_NAME, birthday);
+        prefsEditor.putString(Constants.KEY_BDAY, birthday);
         prefsEditor.apply();
         return true;
     }
