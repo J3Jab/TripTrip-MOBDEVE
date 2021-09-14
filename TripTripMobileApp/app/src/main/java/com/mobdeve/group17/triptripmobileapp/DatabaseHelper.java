@@ -219,6 +219,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_TRIP_ENDDATE, trip.getEndDate());
         values.put(COLUMN_TRIP_STARTLOCATION, trip.getStartLocation());
         values.put(COLUMN_TRIP_ENDLOCATION, trip.getEndLocation());
+        values.put(COLUMN_TRIP_TYPE, trip.getTripType());
+        values.put(COLUMN_TRIP_DESCRIP, trip.getDescription());
         values.put(COLUMN_TRIP_USEREMAIL, userEmail);
         // Inserting Row
         long result = db.insert(TABLE_TRIP, null, values);
@@ -226,6 +228,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         else
             return true;
+    }
+
+    /** This method is to get a specific trip of a user by trip id
+     *
+     * @param tripID
+     * @return trip
+     */
+    public Trip getSpecificTrip(int tripID) {
+
+        Trip trip = new Trip();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from trip where trip_id = ?"
+                ,new String[]{String.valueOf(tripID)});
+        if(cursor != null){
+            if(cursor.moveToFirst()) {
+                    trip.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_ID))));
+                    trip.setTripTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_TITLE)));
+                    trip.setStartDate(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_STARTDATE)));
+                    trip.setEndDate(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_ENDDATE)));
+                    trip.setStartLocation(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_STARTLOCATION)));
+                    trip.setEndLocation(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_ENDLOCATION)));
+                    trip.setTripType(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_TYPE)));
+                    trip.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_DESCRIP)));
+            }
+        }
+
+        cursor.close();
+        db.close();
+        return trip;
     }
 
     public ArrayList<Trip> getTripsByUser(String email) {

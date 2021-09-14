@@ -60,4 +60,18 @@ public class PreferenceUtils {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getString(Constants.KEY_BDAY, null);
     }
+
+    public static boolean saveTripId(int trip_id, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putInt(Constants.KEY_TRIPID, trip_id);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static int getTripId(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getInt(Constants.KEY_TRIPID, 0);
+    }
+
 }

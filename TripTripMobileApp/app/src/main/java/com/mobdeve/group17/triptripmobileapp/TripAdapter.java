@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mobdeve.group17.triptripmobileapp.utils.PreferenceUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -39,6 +40,7 @@ public class TripAdapter extends RecyclerView.Adapter<TripViewHolder> {
         view.findViewById(R.id.fab_edit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PreferenceUtils.saveTripId(dataTrips.get(viewHolder.getBindingAdapterPosition()).getId(), parent.getContext());
                 Intent intent = new Intent(v.getContext(), EditTripActivity.class);
                 v.getContext().startActivity(intent);
             }

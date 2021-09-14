@@ -58,7 +58,7 @@ public class TripsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(TripsActivity.this, AddTripActivity.class);
                 startActivity(intent);
-                adapter.setData(db.getTripsByUser(PreferenceUtils.getEmail(TripsActivity.this)));
+                //adapter.setData(db.getTripsByUser(PreferenceUtils.getEmail(TripsActivity.this)));
             }
         });
 
