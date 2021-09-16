@@ -326,6 +326,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_TRIP_ENDLOCATION, trip.getEndLocation());
         values.put(COLUMN_TRIP_TYPE, trip.getTripType());
         values.put(COLUMN_TRIP_DESCRIP, trip.getDescription());
+        values.put(COLUMN_TRIP_PIC, trip.getTripPicId());
         // updating row
         db.update(TABLE_TRIP, values, COLUMN_TRIP_ID + " = ?",
                 new String[]{String.valueOf(trip.getId())});
