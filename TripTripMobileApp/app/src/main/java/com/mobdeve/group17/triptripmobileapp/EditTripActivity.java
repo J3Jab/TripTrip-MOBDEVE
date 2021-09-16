@@ -33,7 +33,7 @@ public class EditTripActivity extends AppCompatActivity {
     Calendar startCal;
     Calendar endCal;
 
-    Button edit;
+    Button edit, delete;
 
     DatabaseHelper db;
     @Override
@@ -104,6 +104,29 @@ public class EditTripActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
+            }
+        });
+
+        this.delete = findViewById(R.id.btn_edit_trip_delete);
+        this.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(EditTripActivity.this)
+                        .setTitle("Delete")
+                        .setMessage("Would you like to delete this trip?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // delete
+                                db.deleteTrip(PreferenceUtils.getTripId(EditTripActivity.this));
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // user doesn't want to delete
+                            }
+                        })
+                        .show();
             }
         });
     }
