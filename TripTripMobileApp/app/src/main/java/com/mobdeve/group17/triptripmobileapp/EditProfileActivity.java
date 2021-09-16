@@ -51,23 +51,26 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
                 else{
                     if(password.equals(repassword)){
-                        User user = new User();
+                        if(password.equals(PreferenceUtils.getPassword(EditProfileActivity.this)))
+                            Toast.makeText(EditProfileActivity.this, "New password should not be the same as old password", Toast.LENGTH_LONG).show();
+                        else{
+                            User user = new User();
 
-                        PreferenceUtils.saveName(name, EditProfileActivity.this);
-                        PreferenceUtils.savePassword(password, EditProfileActivity.this);
+                            PreferenceUtils.saveName(name, EditProfileActivity.this);
+                            PreferenceUtils.savePassword(password, EditProfileActivity.this);
 
-                        user.setName(PreferenceUtils.getName(EditProfileActivity.this));
-                        user.setBirthday(PreferenceUtils.getBirthday(EditProfileActivity.this));
-                        user.setEmail(PreferenceUtils.getEmail(EditProfileActivity.this));
-                        user.setPassword(PreferenceUtils.getPassword(EditProfileActivity.this));
+                            user.setName(PreferenceUtils.getName(EditProfileActivity.this));
+                            user.setBirthday(PreferenceUtils.getBirthday(EditProfileActivity.this));
+                            user.setEmail(PreferenceUtils.getEmail(EditProfileActivity.this));
+                            user.setPassword(PreferenceUtils.getPassword(EditProfileActivity.this));
 
-                        db.updateUser(user);
+                            db.updateUser(user);
 
-                        Toast.makeText(EditProfileActivity.this, "Changes made successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(EditProfileActivity.this, ViewProfileActivity.class);
-                        startActivity(intent);
-                        finish();
-
+                            Toast.makeText(EditProfileActivity.this, "Changes made successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(EditProfileActivity.this, ViewProfileActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
                     else{
                         Toast.makeText(EditProfileActivity.this, "Password not matching", Toast.LENGTH_SHORT).show();
