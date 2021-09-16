@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,16 +77,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Create tables again
         onCreate(db);
     }
+
+    private String hash(String password) {
+
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-1"); //could also be MD5, SHA-256 etc.
+            md.reset();
+            md.update(password.getBytes("UTF-8"));
+            byte[] resultByte = md.digest();
+            password = String.format("%01x", new java.math.BigInteger(1, resultByte));
+
+        } catch (NoSuchAlgorithmException e) {
+        } catch (UnsupportedEncodingException ex) {
+        }
+        return password;
+    }
     /**
      * This method is to create user record
      */
     public Boolean addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+
         values.put(COLUMN_USER_EMAIL, user.getEmail());
         values.put(COLUMN_USER_NAME, user.getName());
         values.put(COLUMN_USER_BDAY, user.getBirthday());
-        values.put(COLUMN_USER_PASSWORD, user.getPassword());
+        values.put(COLUMN_USER_PASSWORD, hash(user.getPassword()));
         // Inserting Row
         long result = db.insert(TABLE_USER, null, values);
         if(result == -1)
@@ -107,7 +126,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 user.setBirthday(cursor.getString(cursor.getColumnIndex(COLUMN_USER_BDAY)));
                 user.setName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)));
                 user.setEmail(cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAIL)));
-                user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
+                user.setPassword(hash(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD))));
         }
         cursor.close();
         db.close();
@@ -142,7 +161,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean checkUserEmailPassword(String email, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("Select * from user where user_email = ? " +
-                        "and user_password = ?", new String[]{email, password});
+                        "and user_password = ?", new String[]{email, hash(password)});
 
         int cursorCount = cursor.getCount();
         cursor.close();
@@ -167,7 +186,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             user.setBirthday(cursor.getString(cursor.getColumnIndex(COLUMN_USER_BDAY)));
             user.setName(cursor.getString(cursor.getColumnIndex(COLUMN_USER_NAME)));
             user.setEmail(cursor.getString(cursor.getColumnIndex(COLUMN_USER_EMAIL)));
-            user.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD)));
+            user.setPassword(hash(cursor.getString(cursor.getColumnIndex(COLUMN_USER_PASSWORD))));
         }
         cursor.close();
         db.close();
@@ -186,7 +205,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_USER_NAME, user.getName());
         values.put(COLUMN_USER_BDAY, user.getBirthday());
         values.put(COLUMN_USER_EMAIL, user.getEmail());
-        values.put(COLUMN_USER_PASSWORD, user.getPassword());
+        values.put(COLUMN_USER_PASSWORD, hash(user.getPassword()));
         // updating row
         db.update(TABLE_USER, values, COLUMN_USER_EMAIL + " = ?",
                 new String[]{String.valueOf(user.getEmail())});
