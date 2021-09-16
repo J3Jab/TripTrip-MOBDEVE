@@ -38,6 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_TRIP_TYPE = "trip_type";
     private static final String COLUMN_TRIP_DESCRIP = "trip_description";
     private static final String COLUMN_TRIP_USEREMAIL = "trip_userEmail";
+    private static final String COLUMN_TRIP_PIC = "trip_pic";
 
 
     // create table sql query
@@ -50,7 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + COLUMN_TRIP_STARTDATE + " TEXT," + COLUMN_TRIP_ENDDATE + " TEXT,"
             + COLUMN_TRIP_STARTLOCATION + " TEXT," + COLUMN_TRIP_ENDLOCATION
             + " TEXT," + COLUMN_TRIP_TYPE + " TEXT," + COLUMN_TRIP_DESCRIP + " TEXT,"
-            + COLUMN_TRIP_USEREMAIL + " TEXT" + ")";
+            + COLUMN_TRIP_USEREMAIL + " TEXT," + COLUMN_TRIP_PIC + " BLOB" + ")";
 
     // drop table sql query
     private String DROP_USER_TABLE = "DROP TABLE IF EXISTS " + TABLE_USER;
@@ -240,6 +241,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_TRIP_ENDLOCATION, trip.getEndLocation());
         values.put(COLUMN_TRIP_TYPE, trip.getTripType());
         values.put(COLUMN_TRIP_DESCRIP, trip.getDescription());
+        values.put(COLUMN_TRIP_PIC, trip.getTripPicId());
         values.put(COLUMN_TRIP_USEREMAIL, userEmail);
         // Inserting Row
         long result = db.insert(TABLE_TRIP, null, values);
@@ -270,6 +272,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     trip.setEndLocation(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_ENDLOCATION)));
                     trip.setTripType(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_TYPE)));
                     trip.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_DESCRIP)));
+                    trip.setTripPicId(cursor.getBlob(cursor.getColumnIndex(COLUMN_TRIP_PIC)));
             }
         }
 
@@ -296,6 +299,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     trip.setEndLocation(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_ENDLOCATION)));
                     trip.setTripType(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_TYPE)));
                     trip.setDescription(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_DESCRIP)));
+                    trip.setTripPicId(cursor.getBlob(cursor.getColumnIndex(COLUMN_TRIP_PIC)));
                     trips.add(trip);
                 }while(cursor.moveToNext());
 

@@ -9,7 +9,7 @@ public class DataHelper {
     public ArrayList<Trip> getTrips() {
         ArrayList<Trip> trips = new ArrayList<Trip>();
 
-        trips.add(new Trip(
+        /*trips.add(new Trip(
                 R.drawable.mountains,
                 "Nice Trip!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
                 "08/23/2021",
@@ -37,7 +37,7 @@ public class DataHelper {
                 "Philippines",
                 "The Moon",
                 "Round",
-                ""));
+                ""));*/
         return trips;
     }
 }

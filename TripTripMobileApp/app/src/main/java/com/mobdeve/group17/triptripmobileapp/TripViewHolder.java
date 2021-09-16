@@ -30,15 +30,14 @@ public class TripViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void setTripPic(int tripPic) {
-        this.ivTripPic.setImageResource(tripPic);
-
+    public void setTripPic(byte[] tripPic) {
         //if pic is not set, hide imageview
-        if (this.ivTripPic.getDrawable()==null){
+        if (tripPic == null){
             this.ivTripPic.setVisibility(View.GONE);
         }
 
         else{
+            this.ivTripPic.setImageBitmap(ImageHelper.toImage(tripPic));
             this.ivTripPic.setVisibility(View.VISIBLE);
         }
     }

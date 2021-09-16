@@ -1,11 +1,12 @@
 package com.mobdeve.group17.triptripmobileapp;
 
 public class Trip {
-    private int tripPicId, id;
+    private int id;
+    private byte[] tripPicId;
     private String tripTitle, startDate, endDate, startLocation,
             endLocation, type, userEmail, description;
 
-    public Trip(int tripPicId, String title, String startDate, String endDate, String startLocation, String endLocation,
+    public Trip(byte[] tripPicId, String title, String startDate, String endDate, String startLocation, String endLocation,
                 String type, String description) {
         this.tripPicId = tripPicId;
         this.tripTitle = title;
@@ -19,11 +20,11 @@ public class Trip {
 
     public Trip(){}
 
-    public int getTripPicId() {
+    public byte[] getTripPicId() {
         return tripPicId;
     }
 
-    public void setTripPicId(int tripPicId) {
+    public void setTripPicId(byte[] tripPicId) {
         this.tripPicId = tripPicId;
     }
 
