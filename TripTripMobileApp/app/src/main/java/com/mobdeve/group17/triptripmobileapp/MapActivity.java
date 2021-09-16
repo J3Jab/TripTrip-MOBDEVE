@@ -88,7 +88,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
                     } catch (IOException e) {
                         Log.e("MapActivity", "geoLocate: IOException: "+e.getMessage());
-                        Toast.makeText(MapActivity.this, "Geolocate Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MapActivity.this, "Location not found", Toast.LENGTH_SHORT).show();
 
                         finish();
                     }
