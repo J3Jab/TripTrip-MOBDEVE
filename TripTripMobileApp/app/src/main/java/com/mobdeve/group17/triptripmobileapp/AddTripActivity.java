@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,12 +35,11 @@ public class AddTripActivity extends AppCompatActivity {
     //stores chosen date to limit the datePicker
     Calendar startCal;
     Calendar endCal;
-//
-//    DatePickerDialog.OnDateSetListener setListener;
 
     ImageView ivTripImg;
     FloatingActionButton fabAddTripImg;
 
+    ImageButton ibLocSearch;
     Button save;
 
     DatabaseHelper db;
@@ -59,23 +59,27 @@ public class AddTripActivity extends AppCompatActivity {
 
         this.etStartLocation = findViewById(R.id.et_add_start_location);
         this.etEndLocation = findViewById(R.id.et_add_end_location);
-
-        etStartLocation.setFocusable(false);
-        etEndLocation.setFocusable(false);
-
         this.etTripDescription = findViewById(R.id.et_add_description);
 
         //initialize date picker
         initDatePickerDialog();
-
-        //initialize map intents
-        initLocationMaps();
 
         //initialize trip type dropdown
         initDropdown();
 
         //initialize db
         db = new DatabaseHelper(this);
+
+        this.ibLocSearch = findViewById(R.id.ib_add_search_location);
+
+        //launches map for location reference
+        this.ibLocSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddTripActivity.this, MapActivity.class);
+                startActivity(intent);
+            }
+        });
 
         this.save = findViewById(R.id.btn_create_trip);
         this.save.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +97,7 @@ public class AddTripActivity extends AppCompatActivity {
                 String trip_type = tv.getText().toString().trim();
 
                 if(trip_title.isEmpty()||start_date.isEmpty()||end_date.isEmpty()||
-                start_location.isEmpty()||end_location.isEmpty()){
+                        start_location.isEmpty()||end_location.isEmpty()){
                     Toast.makeText(AddTripActivity.this, "Please enter all required fields", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -179,7 +183,6 @@ public class AddTripActivity extends AppCompatActivity {
                         etEndDate.setText(date);
                     }
                 }, year, month, day);
-//                Log.d("start", String.valueOf(year));
 
                 //disables dates before start date if start date has been selected
                 if(startCal!=null){
@@ -195,24 +198,24 @@ public class AddTripActivity extends AppCompatActivity {
         });
     }
 
-    public void initLocationMaps(){
-
-        this.etStartLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AddTripActivity.this, MapActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        this.etEndLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AddTripActivity.this, MapActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
+//    public void initLocationMaps(){
+//
+//        this.etStartLocation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(AddTripActivity.this, MapActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        this.etEndLocation.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(AddTripActivity.this, MapActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//    }
 
     public void initDropdown(){
         this.type_dropdown = (Spinner) findViewById(R.id.dropdown_add_trip_type);
@@ -244,6 +247,5 @@ public class AddTripActivity extends AppCompatActivity {
                 .show();
     }
 
-
-
 }
+

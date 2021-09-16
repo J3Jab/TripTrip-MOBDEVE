@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,13 +31,13 @@ EditTripActivity extends AppCompatActivity {
 
     EditText etTripTitle, etStartDate, etEndDate, etStartLocation, etEndLocation, etTripDescription;
 
-
     Spinner type_dropdown;
 
     //stores chosen date to limit the datePicker
     Calendar startCal;
     Calendar endCal;
 
+    ImageButton ibLocSearch;
     Button edit, delete;
 
     DatabaseHelper db;
@@ -53,6 +54,10 @@ EditTripActivity extends AppCompatActivity {
         this.etTripTitle = findViewById(R.id.et_edit_trip_title);
         this.etStartDate = findViewById(R.id.et_edit_start_date);
         this.etEndDate = findViewById(R.id.et_edit_end_date);
+
+        etStartDate.setFocusable(false);
+        etEndDate.setFocusable(false);
+
         this.etStartLocation = findViewById(R.id.et_edit_start_location);
         this.etEndLocation = findViewById(R.id.et_edit_end_location);
         this.etTripDescription = findViewById(R.id.et_edit_description);
@@ -66,6 +71,18 @@ EditTripActivity extends AppCompatActivity {
 
         initDatePickerDialog();
         initDropdown();
+
+        this.ibLocSearch = findViewById(R.id.ib_edit_search_location);
+
+        //launches map for location reference
+        this.ibLocSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EditTripActivity.this, MapActivity.class);
+                startActivity(intent);
+            }
+        });
+
         this.edit = findViewById(R.id.btn_edit_trip);
         this.edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,9 +166,6 @@ EditTripActivity extends AppCompatActivity {
         trip = db.getSpecificTrip(PreferenceUtils.getTripId(this));
 
         this.type_dropdown = (Spinner) findViewById(R.id.dropdown_edit_trip_type);
-
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this,
-//                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.sort_options));
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(EditTripActivity.this,
                 R.layout.item_dropdown, getResources().getStringArray(R.array.type_options));

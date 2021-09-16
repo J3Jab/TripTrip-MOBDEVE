@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +39,7 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.mobdeve.group17.triptripmobileapp.utils.Constants;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -44,244 +47,104 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private static final String TAG = "MapActivity";
-    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private static final float DEFAULT_ZOOM = 15f;
+    GoogleMap map;
+    SupportMapFragment mapFragment;
+    SearchView svLocation;
 
-    private EditText etSearchLocation;
-    private ImageView ivGps;
-
-    private boolean mLocationPermissionsGranted = false;
-    private GoogleMap mMap;
-    private FusedLocationProviderClient mFusedLocationProviderClient;
+    String setLocation ="";
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        etSearchLocation = findViewById(R.id.et_search_location);
-        ivGps = findViewById(R.id.iv_gps);
-
-        getLocationPermission();
-
-//        Places.initialize(getApplicationContext(), "AIzaSyD7EHw_Ss7DtvZ0bSy5EvK7AIMfvmkhpX8");
+        svLocation = findViewById(R.id.et_search_location);
+        svLocation.setQueryHint("Enter an address, city, or country");
+        svLocation.setIconifiedByDefault(false);
 //
-//        PlacesClient placesClient = Places.createClient(this);
+//        Intent intent =getIntent();
+//        id = intent.getIntExtra(Constants.ET_KEY, 0);
+//        etLocation = (TextView)
 
-//        etSearchLocation.setFocusable(false);
-//        etSearchLocation.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                List<Place.Field> fieldList = Arrays.asList(Place.Field.ADDRESS,
-//                        Place.Field.LAT_LNG, Place.Field.NAME);
-//
-//                Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY,
-//                        fieldList).build(MapActivity.this);
-//
-//                startActivityForResult(intent, 100);
-//            }
-//        });
-    }
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
 
-    @Override
-    public void onMapReady(@NonNull @NotNull GoogleMap googleMap) {
-        Toast.makeText(this, "Map is ready", Toast.LENGTH_SHORT).show();
-        mMap = googleMap;
-
-        //if permissions for getting locations is granted
-        if (mLocationPermissionsGranted) {
-            getDeviceLocation();
-
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
-                    PackageManager.PERMISSION_GRANTED &&
-                    ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
-                            PackageManager.PERMISSION_GRANTED) {
-                return;
-            }
-
-            //marks current location on map
-            mMap.setMyLocationEnabled(true);
-
-            //removes default location button that centers map on current location,
-            // since the search bar will block it anyway
-            mMap.getUiSettings().setMyLocationButtonEnabled(false);
-
-            initComponents();
-        }
-    }
-
-    private void initComponents(){
-        etSearchLocation.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        svLocation.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            public boolean onQueryTextSubmit(String query) {
+                String location = svLocation.getQuery().toString();
+                List<Address> addressList = null;
 
-                //sets enter key to trigger search
-                if(actionId== EditorInfo.IME_ACTION_SEARCH ||
-                        actionId==EditorInfo.IME_ACTION_DONE ||
-                        actionId==KeyEvent.ACTION_DOWN ||
-                        actionId==KeyEvent.KEYCODE_ENTER){
+                if(location!=null || !location.equals("")) {
+                    Geocoder geocoder = new Geocoder(MapActivity.this);
 
-                    //execute search method
-                    geoLocate();
+                    try{
+                        addressList = geocoder.getFromLocationName(location,1);
+
+                    } catch (IOException e) {
+                        Log.e("MapActivity", "geoLocate: IOException: "+e.getMessage());
+                        Toast.makeText(MapActivity.this, "Geolocate Error", Toast.LENGTH_SHORT).show();
+
+                        finish();
+                    }
+
+                    Address address = addressList.get(0);
+                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                    Log.d("MapActivity", "onQueryTextSubmit address: "+ address.getLocality()+" "+address.getCountryName());
+
+                    //if known name is available
+                    if(!address.getFeatureName().isEmpty()) {
+                        setLocation = address.getFeatureName()+" - "+
+                                address.getLocality()+", "+address.getCountryName();;
+                    }
+                    //if no known name, only city and country is known
+                    else if(!address.getLocality().isEmpty()){
+                        setLocation = address.getLocality()+", "+address.getCountryName();
+                    }
+                    //if only country is known
+                    else{
+                        setLocation = address.getCountryName();
+                    }
+
+                    map.addMarker(new MarkerOptions().position(latLng).title(setLocation));
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+
                 }
 
                 return false;
             }
-        });
 
-        //clicking on gps image centers camera back to current location on map
-        ivGps.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Log.d("MapActivity", "onClick: clicked gps icon");
-                getDeviceLocation();
+            public boolean onQueryTextChange(String newText) {
+                return false;
             }
         });
-
-        //hides keyboard
-        hideSoftKeyboard();
-    }
-
-    private void geoLocate(){
-        Log.d("MapActivity", "geoLocate: geolocating");
-
-        String searchText = etSearchLocation.getText().toString().trim();
-
-        Geocoder geocoder = new Geocoder(MapActivity.this);
-        List<Address> list = new ArrayList<>();
-
-        try{
-            list = geocoder.getFromLocationName(searchText, 1);
-
-        } catch (IOException e){
-            Log.e("MapActivity", "geoLocate: IOException: "+e.getMessage());
-            Toast.makeText(this, "Location not found.", Toast.LENGTH_SHORT).show();
-        }
-
-        //if search results are found
-        if (list.size()>0){
-            Address address = list.get(0);
-
-            Log.d("MapActivity", "geoLocate: found a location: "+address.toString());
-     //       Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
-
-            moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM,
-                    address.getAddressLine(0));
-        }
-    }
-
-    private void getDeviceLocation(){
-        Log.d("MapActivity", "getDeviceLocation: getting current location");
-
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
-        try {
-            if(mLocationPermissionsGranted){
-                Task location = mFusedLocationProviderClient.getLastLocation();
-                location.addOnCompleteListener(new OnCompleteListener() {
-                    @Override
-                    public void onComplete(@NonNull @NotNull Task task) {
-                        if(task.isSuccessful()){
-                            Log.d("MapActivity", "onComplete: current location found");
-                            Location currentLocation = (Location) task.getResult();
-
-                            //move camera to current location
-                            moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
-                                    DEFAULT_ZOOM, "Current Location");
-                        }
-
-                        else{
-                            Log.d("MapActivity", "onComplete: current location null");
-                            Toast.makeText(MapActivity.this, "Unable to get current location", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        }catch (SecurityException e){
-            Log.e("MapActivity", "getDeviceLocation: SecurityException - "+ e.getMessage());
-        }
-    }
-
-    /**
-     * moves camera to current location (if found) on Google map
-     * @param latLng current location in latitude and longitude
-     * @param zoom zoom level of camera
-     */
-    private void moveCamera(LatLng latLng, float zoom, String title){
-        Log.d("MapActivity", "moveCamera: move cam to lat: " + latLng.latitude+" lng: "+latLng.longitude);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
-
-        //places marker on searched locations
-        if (!title.equals("Current Location")){
-            MarkerOptions options = new MarkerOptions().position(latLng).title(title);
-            mMap.addMarker(options);
-        }
-
-        //hide keyboard after searching
-        hideSoftKeyboard();
-    }
-
-    /**
-     * initializes Google Map
-     */
-    private void initMap(){
-        Log.d("MapActivity", "initMap: initializing map");
-        final SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-
-        mapFragment.getMapAsync(MapActivity.this);
-    }
-
-    /**
-     * gets permissions for location services
-     */
-    private void getLocationPermission(){
-        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
-
-        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                FINE_LOCATION)== PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                        COARSE_LOCATION)== PackageManager.PERMISSION_GRANTED){
-                mLocationPermissionsGranted = true;
-                initMap();
-        }
-        else{
-            ActivityCompat.requestPermissions(this, permissions, LOCATION_PERMISSION_REQUEST_CODE);
-        }
+        mapFragment.getMapAsync(this);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NotNull String[] permissions, @NotNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        mLocationPermissionsGranted = false;
-
-        switch (requestCode) {
-            case LOCATION_PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0) {
-                    for (int i = 0; i < grantResults.length; i++) {
-                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                            mLocationPermissionsGranted = false;
-                            return;
-                        }
-                    }
-
-                    mLocationPermissionsGranted = true;
-
-                    //initialize map
-                    initMap();
-                }
-        }
+    public void onMapReady(@NonNull @NotNull GoogleMap googleMap) {
+        map = googleMap;
     }
 
-    /**
-     * hides keyboard for searching
-     */
-    private void hideSoftKeyboard(){
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if(svLocation.getQuery().toString().isEmpty()){
+            Toast.makeText(MapActivity.this, "Your searched location is: "+
+                    setLocation, Toast.LENGTH_LONG).show();
+        }
+
+        else{
+            Toast.makeText(MapActivity.this, "Your searched location is: "+
+                    svLocation.getQuery().toString()+" at "+setLocation, Toast.LENGTH_LONG).show();
+        }
+
     }
 }
