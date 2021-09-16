@@ -29,7 +29,8 @@
             android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_search_black_24dp" />
+            android:src="@drawable/ic_search_black_24dp"
+            android:tint="#787878" />
 
         <EditText
             android:id="@+id/et_search_location"
@@ -39,10 +40,12 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/iv_search"
             android:background="@null"
-            android:hint="Search location"
+            android:hint="Enter location"
+            android:inputType="text"
             android:maxLines="1"
+            android:textColor="@color/black"
             android:textColorHint="@color/hint_gray"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
     </RelativeLayout>
 
