@@ -48,8 +48,6 @@
     <string-array name="sort_options">
         <item>Start Date</item>
         <item>End Date</item>
-        <item>Start Location</item>
-        <item>End Location</item>
     </string-array>
 
     <string-array name="type_options">
