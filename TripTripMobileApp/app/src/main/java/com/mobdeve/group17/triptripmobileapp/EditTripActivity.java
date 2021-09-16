@@ -22,7 +22,8 @@ import com.mobdeve.group17.triptripmobileapp.utils.PreferenceUtils;
 
 import java.util.Calendar;
 
-public class EditTripActivity extends AppCompatActivity {
+public class
+EditTripActivity extends AppCompatActivity {
 
     EditText etTripTitle, etStartDate, etEndDate, etStartLocation, etEndLocation, etTripDescription;
 
@@ -94,7 +95,7 @@ public class EditTripActivity extends AppCompatActivity {
                     trip.setTripType(trip_type);
 
                     if(trip_description.isEmpty())
-                        trip.setDescription(null);
+                        trip.setDescription("");
                     else
                         trip.setDescription(trip_description);
 
@@ -118,6 +119,8 @@ public class EditTripActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 // delete
                                 db.deleteTrip(PreferenceUtils.getTripId(EditTripActivity.this));
+                                Intent intent = new Intent(EditTripActivity.this, TripsActivity.class);
+                                startActivity(intent);
                                 finish();
                             }
                         })

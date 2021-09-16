@@ -1,5 +1,6 @@
 package com.mobdeve.group17.triptripmobileapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -43,12 +44,22 @@ public class TripAdapter extends RecyclerView.Adapter<TripViewHolder> {
 
         db = new DatabaseHelper(parent.getContext());
 
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PreferenceUtils.saveTripId(dataTrips.get(viewHolder.getBindingAdapterPosition()).getId(), parent.getContext());
+                Intent intent = new Intent(v.getContext(), ViewTripActivity.class);
+                v.getContext().startActivity(intent);
+                ((TripsActivity)context).finish();
+            }
+        });
         view.findViewById(R.id.fab_edit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PreferenceUtils.saveTripId(dataTrips.get(viewHolder.getBindingAdapterPosition()).getId(), parent.getContext());
                 Intent intent = new Intent(v.getContext(), EditTripActivity.class);
                 v.getContext().startActivity(intent);
+                ((TripsActivity)context).finish();
             }
         });
 

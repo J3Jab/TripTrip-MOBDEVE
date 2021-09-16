@@ -111,7 +111,7 @@ public class AddTripActivity extends AppCompatActivity {
                     trip.setTripType(trip_type);
 
                     if(trip_description.isEmpty())
-                        trip.setDescription(null);
+                        trip.setDescription("");
                     else
                         trip.setDescription(trip_description);
 
