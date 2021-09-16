@@ -30,34 +30,32 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:src="@drawable/ic_search_black_24dp"
-            android:tint="#787878" />
+            android:visibility="gone"
+            app:tint="#787878" />
 
-        <EditText
+        <SearchView
             android:id="@+id/et_search_location"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/iv_search"
-            android:background="@null"
-            android:hint="Enter location"
             android:inputType="text"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textColorHint="@color/hint_gray"
-            android:textSize="16sp" />
+            app:queryHint="Enter location"
+            android:theme="@style/searchView_style"/>
 
     </RelativeLayout>
 
     <ImageView
+        android:id="@+id/iv_gps"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_below="@id/rl_input"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
         android:scaleType="centerCrop"
-        android:id="@+id/iv_gps"
-        android:src="@drawable/ic_gps"/>
+        android:src="@drawable/ic_gps"
+        android:visibility="gone" />
 
 </RelativeLayout>
