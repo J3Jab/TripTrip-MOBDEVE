@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -53,27 +54,33 @@ public class RegisterActivity extends AppCompatActivity {
                         || user.getPassword().equals("") || user_repassword.equals(""))
                     Toast.makeText(RegisterActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                 else{
-                    if(user.getPassword().equals(user_repassword)){
-                        Boolean checkuser = db.checkUserEmail(user.getEmail());
-                        if(!checkuser){
-                            Boolean insert = db.addUser(user);
-                            if(insert == true){
-                                Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent);
-                                finish();
+                    if(isValidEmail(user.getEmail())){
+                        if(user.getPassword().equals(user_repassword)){
+                            Boolean checkuser = db.checkUserEmail(user.getEmail());
+                            if(!checkuser){
+                                Boolean insert = db.addUser(user);
+                                if(insert == true){
+                                    Toast.makeText(RegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                                else{
+                                    Toast.makeText(RegisterActivity.this, "Registered failed", Toast.LENGTH_SHORT).show();
+                                }
                             }
                             else{
-                                Toast.makeText(RegisterActivity.this, "Registered failed", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "User already exists", Toast.LENGTH_SHORT).show();
                             }
                         }
                         else{
-                            Toast.makeText(RegisterActivity.this, "User already exists", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Password not matching", Toast.LENGTH_SHORT).show();
                         }
                     }
                     else{
-                        Toast.makeText(RegisterActivity.this, "Password not matching", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Invalid Email Address. Please try again", Toast.LENGTH_SHORT).show();
                     }
+
                 }
 
             }
@@ -109,5 +116,9 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
 }
