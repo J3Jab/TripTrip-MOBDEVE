@@ -60,7 +60,7 @@ EditTripActivity extends AppCompatActivity {
     Button edit, delete;
 
     ImageView ivEditTripImage;
-    FloatingActionButton fabEditTripImage;
+    FloatingActionButton fabEditTripImage, fabDeleteTripImage;
 
     private ActivityResultLauncher<Intent> choosePicLauncher;
     private static final String READ_STORAGE = Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -91,6 +91,7 @@ EditTripActivity extends AppCompatActivity {
 
         this.ivEditTripImage = findViewById(R.id.iv_edit_trip_image);
         this.fabEditTripImage = findViewById(R.id.fab_add_trip_image_edit);
+        this.fabDeleteTripImage = findViewById(R.id.fab_add_trip_image_delete);
 
         this.etTripTitle.setText(trip.getTripTitle());
         this.etStartDate.setText(trip.getStartDate());
@@ -227,6 +228,14 @@ EditTripActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getStoragePermission();
+            }
+        });
+
+        this.fabDeleteTripImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ImageHelper.hasImage(ivEditTripImage))
+                    ivEditTripImage.setImageDrawable(null);
             }
         });
     }
