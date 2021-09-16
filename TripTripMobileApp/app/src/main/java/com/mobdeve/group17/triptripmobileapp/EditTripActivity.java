@@ -20,7 +20,10 @@ import android.widget.Toast;
 
 import com.mobdeve.group17.triptripmobileapp.utils.PreferenceUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class
 EditTripActivity extends AppCompatActivity {
@@ -81,6 +84,11 @@ EditTripActivity extends AppCompatActivity {
                 if(trip_title.isEmpty()||start_date.isEmpty()||end_date.isEmpty()||
                         start_location.isEmpty()||end_location.isEmpty()||trip_type.isEmpty()){
                     Toast.makeText(EditTripActivity.this, "Please enter all required fields", Toast.LENGTH_SHORT).show();
+                }
+
+                //if trip date range is invalid
+                else if(!validDates(start_date, end_date)) {
+                    Toast.makeText(EditTripActivity.this, "Invalid date range", Toast.LENGTH_SHORT).show();
                 }
 
                 else {
@@ -162,6 +170,9 @@ EditTripActivity extends AppCompatActivity {
         this.etStartDate = findViewById(R.id.et_edit_start_date);
         this.etEndDate = findViewById(R.id.et_edit_end_date);
 
+        db = new DatabaseHelper(EditTripActivity.this);
+        Trip trip = db.getSpecificTrip(PreferenceUtils.getTripId(EditTripActivity.this));
+
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
@@ -236,8 +247,9 @@ EditTripActivity extends AppCompatActivity {
                 .setMessage("Would you like to cancel editing this trip?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // delete
-                        EditTripActivity.super.onBackPressed();
+                        Intent intent = new Intent(EditTripActivity.this, TripsActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -246,5 +258,24 @@ EditTripActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    public boolean validDates(String start, String end){
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        Date startDate = null;
+        Date endDate = null;
+        try {
+            startDate = format.parse(start);
+            endDate = format.parse(end);
+
+            //if end date is set before the start date
+            if(endDate.before(startDate))
+                return false;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 }
