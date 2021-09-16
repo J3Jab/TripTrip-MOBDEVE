@@ -50,7 +50,7 @@ public class NewPasswordActivity extends AppCompatActivity {
 
                         db.updateUser(user);
 
-                        Toast.makeText(NewPasswordActivity.this, "Password changed Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NewPasswordActivity.this, "Password changed successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                         finish();
