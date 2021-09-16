@@ -139,7 +139,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         ivGps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked gps icon");
+                Log.d("MapActivity", "onClick: clicked gps icon");
                 getDeviceLocation();
             }
         });
@@ -149,7 +149,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     private void geoLocate(){
-        Log.d(TAG, "geoLocate: geolocating");
+        Log.d("MapActivity", "geoLocate: geolocating");
 
         String searchText = etSearchLocation.getText().toString().trim();
 
@@ -160,14 +160,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             list = geocoder.getFromLocationName(searchText, 1);
 
         } catch (IOException e){
-            Log.e(TAG, "geoLocate: IOException: "+e.getMessage());
+            Log.e("MapActivity", "geoLocate: IOException: "+e.getMessage());
+            Toast.makeText(this, "Location not found.", Toast.LENGTH_SHORT).show();
         }
 
         //if search results are found
         if (list.size()>0){
             Address address = list.get(0);
 
-            Log.d(TAG, "geoLocate: found a location: "+address.toString());
+            Log.d("MapActivity", "geoLocate: found a location: "+address.toString());
      //       Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
 
             moveCamera(new LatLng(address.getLatitude(), address.getLongitude()), DEFAULT_ZOOM,
@@ -176,7 +177,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
     private void getDeviceLocation(){
-        Log.d(TAG, "getDeviceLocation: getting current location");
+        Log.d("MapActivity", "getDeviceLocation: getting current location");
 
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -187,7 +188,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     @Override
                     public void onComplete(@NonNull @NotNull Task task) {
                         if(task.isSuccessful()){
-                            Log.d(TAG, "onComplete: current location found");
+                            Log.d("MapActivity", "onComplete: current location found");
                             Location currentLocation = (Location) task.getResult();
 
                             //move camera to current location
@@ -196,14 +197,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         }
 
                         else{
-                            Log.d(TAG, "onComplete: current location null");
+                            Log.d("MapActivity", "onComplete: current location null");
                             Toast.makeText(MapActivity.this, "Unable to get current location", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
             }
         }catch (SecurityException e){
-            Log.e(TAG, "getDeviceLocation: SecurityException - "+ e.getMessage());
+            Log.e("MapActivity", "getDeviceLocation: SecurityException - "+ e.getMessage());
         }
     }
 
@@ -213,7 +214,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
      * @param zoom zoom level of camera
      */
     private void moveCamera(LatLng latLng, float zoom, String title){
-        Log.d(TAG, "moveCamera: move cam to lat: " + latLng.latitude+" lng: "+latLng.longitude);
+        Log.d("MapActivity", "moveCamera: move cam to lat: " + latLng.latitude+" lng: "+latLng.longitude);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
 
         //places marker on searched locations
@@ -230,7 +231,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
      * initializes Google Map
      */
     private void initMap(){
-        Log.d(TAG, "initMap: initializing map");
+        Log.d("MapActivity", "initMap: initializing map");
         final SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(MapActivity.this);

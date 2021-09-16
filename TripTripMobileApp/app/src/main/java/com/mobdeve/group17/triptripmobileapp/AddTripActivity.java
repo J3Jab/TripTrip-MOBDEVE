@@ -1,10 +1,8 @@
 package com.mobdeve.group17.triptripmobileapp;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,11 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.mobdeve.group17.triptripmobileapp.utils.PreferenceUtils;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,9 +34,10 @@ public class AddTripActivity extends AppCompatActivity {
 //
 //    DatePickerDialog.OnDateSetListener setListener;
 
-    Button save;
+    ImageView ivTripImg;
+    FloatingActionButton fabAddTripImg;
 
-    DatabaseHelper db;
+    Button save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +45,29 @@ public class AddTripActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_trip);
 
         this.etTripTitle = findViewById(R.id.et_add_trip_title);
+
+        this.etStartDate = findViewById(R.id.et_add_start_date);
+        this.etEndDate = findViewById(R.id.et_add_end_date);
+
+        etStartDate.setFocusable(false);
+        etEndDate.setFocusable(false);
+
         this.etStartLocation = findViewById(R.id.et_add_start_location);
         this.etEndLocation = findViewById(R.id.et_add_end_location);
+
+        etStartLocation.setFocusable(false);
+        etEndLocation.setFocusable(false);
+
         this.etTripDescription = findViewById(R.id.et_add_description);
 
-        //initialize date fields and date picker
+        //initialize date picker
         initDatePickerDialog();
+
+        //initialize map intents
+        initLocationMaps();
 
         //initialize trip type dropdown
         initDropdown();
-
-        db = new DatabaseHelper(this);
 
         this.save = findViewById(R.id.btn_create_trip);
         this.save.setOnClickListener(new View.OnClickListener() {
@@ -83,21 +95,6 @@ public class AddTripActivity extends AppCompatActivity {
 //                }
 
                 else{
-                    Trip trip = new Trip();
-
-                    trip.setTripTitle(trip_title);
-                    trip.setStartDate(start_date);
-                    trip.setEndDate(end_date);
-                    trip.setStartLocation(start_location);
-                    trip.setEndLocation(end_location);
-                    trip.setTripType(trip_type);
-
-                    if(trip_description.isEmpty())
-                        trip.setDescription(null);
-                    else
-                        trip.setDescription(trip_description);
-
-                    db.addTrip(trip, PreferenceUtils.getEmail(AddTripActivity.this));
                     Intent intent = new Intent(AddTripActivity.this, TripsActivity.class);
                     startActivity(intent);
                     finish();
@@ -108,11 +105,6 @@ public class AddTripActivity extends AppCompatActivity {
     }
 
     public void initDatePickerDialog(){
-        this.etStartDate = findViewById(R.id.et_add_start_date);
-        this.etEndDate = findViewById(R.id.et_add_end_date);
-
-        etStartDate.setFocusable(false);
-        etEndDate.setFocusable(false);
 
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
@@ -186,11 +178,27 @@ public class AddTripActivity extends AppCompatActivity {
         });
     }
 
+    public void initLocationMaps(){
+
+        this.etStartLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddTripActivity.this, MapActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        this.etEndLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddTripActivity.this, MapActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     public void initDropdown(){
         this.type_dropdown = (Spinner) findViewById(R.id.dropdown_add_trip_type);
-
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this,
-//                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.sort_options));
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(AddTripActivity.this,
                 R.layout.item_dropdown, getResources().getStringArray(R.array.type_options));
@@ -199,27 +207,7 @@ public class AddTripActivity extends AppCompatActivity {
         type_dropdown.setAdapter(arrayAdapter);
     }
 
-    @Override
-    public void onBackPressed() {
-
-        new AlertDialog.Builder(this)
-                .setTitle("Cancel Adding Trip")
-                .setMessage("Would you like to cancel adding a trip?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // delete
-                        AddTripActivity.super.onBackPressed();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // user doesn't want to delete
-                    }
-                })
-                .show();
-    }
-
-    //    public boolean validDates(String start, String end){
+//    public boolean validDates(String start, String end){
 //        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
 //        Date startDate = null;
 //        Date endDate = null;
