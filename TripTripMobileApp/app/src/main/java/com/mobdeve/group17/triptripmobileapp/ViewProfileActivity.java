@@ -14,8 +14,6 @@ public class ViewProfileActivity extends AppCompatActivity {
 
     private FloatingActionButton fab_edit;
     TextView tv_Name, tv_Bday, tv_Email;
-
-    DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +33,6 @@ public class ViewProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ViewProfileActivity.this, EditProfileActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
     }

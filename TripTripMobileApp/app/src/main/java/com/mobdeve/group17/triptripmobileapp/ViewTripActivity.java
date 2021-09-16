@@ -76,5 +76,13 @@ public class ViewTripActivity extends AppCompatActivity {
                         .show();
             }
         });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ViewTripActivity.this, TripsActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
