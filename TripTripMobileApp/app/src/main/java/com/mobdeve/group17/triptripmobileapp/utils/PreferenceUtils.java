@@ -9,6 +9,19 @@ public class PreferenceUtils {
 
     }
 
+    public static boolean saveLogin(Boolean login, Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putBoolean(String.valueOf(Constants.KEY_LOGIN), login);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static boolean IsLoggedIn(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean(String.valueOf(Constants.KEY_LOGIN), false);
+    }
+
     public static boolean saveEmail(String email, Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor prefsEditor = prefs.edit();

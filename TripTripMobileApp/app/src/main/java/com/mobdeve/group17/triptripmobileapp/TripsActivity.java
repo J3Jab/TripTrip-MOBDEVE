@@ -99,8 +99,7 @@ public class TripsActivity extends AppCompatActivity {
                 startActivity(edit);
                 break;
             case R.id.item_logout:
-                Intent logout = new Intent(TripsActivity.this, MainActivity.class);
-                startActivity(logout);
+                onBackPressed();
                 break;
         }
         return true;
@@ -114,6 +113,7 @@ public class TripsActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // delete
+                        PreferenceUtils.saveLogin(false, TripsActivity.this);
                         Intent intent = new Intent(TripsActivity.this, MainActivity.class);
                         finish();
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
