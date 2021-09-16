@@ -1,8 +1,10 @@
 package com.mobdeve.group17.triptripmobileapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -94,12 +96,6 @@ public class AddTripActivity extends AppCompatActivity {
                 start_location.isEmpty()||end_location.isEmpty()){
                     Toast.makeText(AddTripActivity.this, "Please enter all required fields", Toast.LENGTH_SHORT).show();
                 }
-
-//                //if trip date range is invalid
-//                else if(!validDates(start_date, end_date)) {
-//                    Toast.makeText(AddTripActivity.this, "Invalid date range", Toast.LENGTH_SHORT).show();
-//                }
-
                 else{
                     Trip trip = new Trip();
 
@@ -228,22 +224,26 @@ public class AddTripActivity extends AppCompatActivity {
         type_dropdown.setAdapter(arrayAdapter);
     }
 
-//    public boolean validDates(String start, String end){
-//        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-//        Date startDate = null;
-//        Date endDate = null;
-//        try {
-//            startDate = format.parse(start);
-//            endDate = format.parse(end);
-//
-//            //if end date is set before the start date
-//            if(endDate.before(startDate))
-//                return false;
-//
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return true;
-//    }
+    @Override
+    public void onBackPressed() {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Cancel Adding Trip")
+                .setMessage("Would you like to cancel adding a trip?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(AddTripActivity.this, TripsActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .show();
+    }
+
+
+
 }
