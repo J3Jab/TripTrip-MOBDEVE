@@ -17,13 +17,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mobdeve.group17.triptripmobileapp.utils.PreferenceUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 public class TripsActivity extends AppCompatActivity {
 
@@ -79,6 +85,70 @@ public class TripsActivity extends AppCompatActivity {
 
         arrayAdapter.setDropDownViewResource(R.layout.item_dropdown);
         dropdown.setAdapter(arrayAdapter);
+
+
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[] options = getResources().getStringArray(R.array.sort_options);
+
+                switch(options[position]){
+                    case "Start Date":
+                        Collections.sort(dataTrips, new Comparator<Trip>() {
+                            @Override
+                            public int compare(Trip o1, Trip o2) {
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                                long time1 = 0, time2 = 0;
+                                try {
+                                    Date date1 = sdf.parse(o1.getStartDate());
+                                    time1 = date1.getTime();
+
+                                    Date date2 = sdf.parse(o2.getStartDate());
+                                    time2 = date2.getTime();
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                return Long.compare(time1, time2);
+                            }
+                        });
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case "End Date":
+                        Collections.sort(dataTrips, new Comparator<Trip>() {
+                            @Override
+                            public int compare(Trip o1, Trip o2) {
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                                long time1 = 0, time2 = 0;
+                                try {
+                                    Date date1 = sdf.parse(o1.getEndDate());
+                                    time1 = date1.getTime();
+
+                                    Date date2 = sdf.parse(o2.getEndDate());
+                                    time2 = date2.getTime();
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                return Long.compare(time1, time2);
+                            }
+                        });
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case "Start Location":
+                        Log.d("message", "start location");
+                        break;
+                    case "End Location":
+                        Log.d("message", "end location");
+                        break;
+
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
