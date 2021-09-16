@@ -5,5 +5,11 @@
         <item name="cornerSize">8dp</item>
     </style>
 
+    <style name="searchView_style" parent="Widget.AppCompat.SearchView">
+        <item name="android:colorForeground">#686868</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:editTextColor">#686868</item>
+        <item name="android:textColorHint">@color/hint_gray</item>
+    </style>
 
 </resources>
