@@ -63,7 +63,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
                         db.updateUser(user);
 
-                        Toast.makeText(EditProfileActivity.this, "Changes made Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditProfileActivity.this, "Changes made successfully", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(EditProfileActivity.this, ViewProfileActivity.class);
                         startActivity(intent);
                         finish();
