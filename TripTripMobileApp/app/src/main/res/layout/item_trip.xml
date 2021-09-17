@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="08/23/2021"
+            android:textColor="@color/font_color"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/tv_trip_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_trip_title" />
@@ -47,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:text="-"
+            android:textColor="@color/font_color"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/tv_start_date"
             app:layout_constraintTop_toTopOf="@+id/tv_start_date" />
@@ -71,6 +73,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginBottom="25dp"
             android:text="08/23/2021"
+            android:textColor="@color/font_color"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_hyphen"
@@ -121,6 +124,7 @@
             android:scrollHorizontally="true"
             android:singleLine="false"
             android:text="Trip Title"
+            android:textColor="@color/font_color"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

@@ -19,14 +19,12 @@
       app:srcCompat="@drawable/mountains" />
 
   <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
+      android:layout_width="361dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="25dp"
-      android:layout_marginTop="25dp"
+      android:layout_marginTop="30dp"
       android:layout_marginEnd="25dp"
-      android:layout_marginBottom="25dp"
       android:background="@drawable/trip_box"
-      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent">
@@ -40,7 +38,7 @@
         android:layout_marginEnd="30dp"
         android:background="#00FFFFFF"
         android:scaleType="centerCrop"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -69,6 +67,7 @@
         android:layout_marginEnd="30dp"
         android:maxLength="50"
         android:text="The scorpion wants to get across the river, so he asks the frog to carry him across. But the frog's like, &quot;Well, what's in it for me?&quot;"
+        android:textColor="@color/font_color"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,6 +105,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/start_location"
+        android:textColor="@color/font_color"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/tv_view_trip_title"
@@ -118,6 +118,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/end_location"
+        android:textColor="@color/font_color"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/tv_view_trip_title"
@@ -130,6 +131,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/description"
+        android:textColor="@color/font_color"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/tv_view_trip_title"
@@ -175,24 +177,11 @@
         android:backgroundTint="@color/delete_red"
         android:text="@string/delete_trip"
         android:textColor="@color/white"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btn_view_edit_trip"
         app:layout_constraintStart_toStartOf="@+id/btn_view_edit_trip"
         app:layout_constraintTop_toBottomOf="@+id/btn_view_edit_trip" />
-
-    <Button
-        android:id="@+id/btn_view_edit_trip"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="60dp"
-        android:backgroundTint="@color/yellow_green"
-        android:text="@string/edit_trip"
-        android:textColor="@color/btn_text_blue"
-        app:layout_constraintEnd_toEndOf="@+id/tv_view_description"
-        app:layout_constraintStart_toStartOf="@+id/tv_view_description"
-        app:layout_constraintTop_toBottomOf="@+id/tv_view_description" />
 
     <TextView
         android:id="@+id/tv_view_trip_title"
@@ -205,6 +194,7 @@
         android:scrollHorizontally="true"
         android:singleLine="false"
         android:text="Trip Title"
+        android:textColor="@color/font_color"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/iv_view_trip_pic"
@@ -228,5 +218,27 @@
         app:layout_constraintStart_toStartOf="@+id/tv_view_trip_title"
         app:layout_constraintTop_toBottomOf="@+id/tv_view_start_location_label" />
 
+    <Button
+        android:id="@+id/btn_view_edit_trip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="25dp"
+        android:backgroundTint="@color/yellow_green"
+        android:text="@string/edit_trip"
+        android:textColor="@color/btn_text_blue"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_view_description"
+        app:layout_constraintVertical_bias="0.382" />
+
+
   </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
