@@ -18,7 +18,7 @@ public class ViewTripActivity extends AppCompatActivity {
 
     private Button btnEditTrip;
     private Button btnDeleteTrip;
-    TextView tv_title, tv_startDate, tv_endDate, tv_startLocation, tv_endLocation, tv_descrip;
+    TextView tv_title, tv_startDate, tv_endDate, tv_startLocation, tv_endLocation, tv_descrip, tv_tripType;
     ImageView iv_view_trip_pic;
 
     DatabaseHelper db;
@@ -36,6 +36,7 @@ public class ViewTripActivity extends AppCompatActivity {
         this.tv_startLocation = findViewById(R.id.tv_view_start_location);
         this.tv_endLocation = findViewById(R.id.tv_view_end_location);
         this.tv_descrip = findViewById(R.id.tv_view_description);
+        this.tv_tripType = findViewById(R.id.tv_view_trip_type);
         this.iv_view_trip_pic = findViewById(R.id.iv_view_trip_pic);
 
         db = new DatabaseHelper(this);
@@ -48,6 +49,7 @@ public class ViewTripActivity extends AppCompatActivity {
         this.tv_startLocation.setText(trip.getStartLocation());
         this.tv_endLocation.setText(trip.getEndLocation());
         this.tv_descrip.setText(trip.getDescription());
+        this.tv_tripType.setText(trip.getTripType());
 
         //if trip pic exists
         if(trip.getTripPicId() != null) {
