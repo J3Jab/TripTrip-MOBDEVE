@@ -35,7 +35,7 @@
             android:id="@+id/tv_start_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:text="08/23/2021"
             android:textColor="@color/font_color"
             android:textSize="14sp"
@@ -70,14 +70,15 @@
             android:id="@+id/tv_end_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="24dp"
             android:text="08/23/2021"
             android:textColor="@color/font_color"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_hyphen"
-            app:layout_constraintTop_toTopOf="@+id/tv_hyphen"
+            app:layout_constraintEnd_toStartOf="@+id/tv_hyphen"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_start_date"
+            app:layout_constraintTop_toBottomOf="@+id/tv_start_date"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView

@@ -22,7 +22,7 @@
       android:layout_width="361dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="25dp"
-      android:layout_marginTop="30dp"
+      android:layout_marginTop="20dp"
       android:layout_marginEnd="25dp"
       android:background="@drawable/trip_box"
       app:layout_constraintEnd_toEndOf="parent"
@@ -135,8 +135,9 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/tv_view_trip_title"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="@+id/tv_view_trip_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_view_end_location" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_view_trip_type" />
 
     <TextView
         android:id="@+id/tv_view_end_location"
@@ -153,6 +154,23 @@
         app:layout_constraintEnd_toEndOf="@+id/tv_view_trip_title"
         app:layout_constraintStart_toStartOf="@+id/tv_view_trip_title"
         app:layout_constraintTop_toBottomOf="@+id/tv_view_end_location_label" />
+
+    <TextView
+        android:id="@+id/tv_view_trip_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:maxLength="50"
+        android:maxLines="1"
+        android:text="Single Trip"
+        android:textColor="@color/highlight_blue"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/tv_view_trip_title"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tv_view_trip_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_view_end_location" />
 
     <TextView
         android:id="@+id/tv_trip"
@@ -220,10 +238,10 @@
 
     <Button
         android:id="@+id/btn_view_edit_trip"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="206dp"
+        android:layout_height="41dp"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="80dp"
         android:layout_marginBottom="25dp"
         android:backgroundTint="@color/yellow_green"
@@ -235,7 +253,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_view_description"
-        app:layout_constraintVertical_bias="0.382" />
+        app:layout_constraintVertical_bias="0.278" />
 
 
   </androidx.constraintlayout.widget.ConstraintLayout>
