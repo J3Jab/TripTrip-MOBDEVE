@@ -152,6 +152,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
+    public boolean checkUserEmailBirthday(String email, String birthday) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("Select * from user where user_email = ? and user_bday = ?", new String[] {email, birthday});
+        int cursorCount = cursor.getCount();
+        cursor.close();
+        db.close();
+        if (cursorCount > 0) {
+            return true;
+        }
+        return false;
+    }
     /**
      * This method is to check user exist or not
      *

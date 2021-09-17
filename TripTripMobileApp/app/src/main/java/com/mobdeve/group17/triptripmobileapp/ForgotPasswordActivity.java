@@ -45,7 +45,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 if(user_email.equals("") || user_bday.equals(""))
                     Toast.makeText(ForgotPasswordActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                 else{
-                    Boolean checkuser = db.checkUserEmail(user_email);
+                    Boolean checkuser = db.checkUserEmailBirthday(user_email, user_bday);
                     if(checkuser){
                         User user = db.getUser_emailBirthday(user_email, user_bday);
                         //SharedPreferences
@@ -57,7 +57,6 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         Toast.makeText(ForgotPasswordActivity.this, "User found", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), NewPasswordActivity.class);
                         startActivity(intent);
-                        finish();
                     }
                     else{
                         Toast.makeText(ForgotPasswordActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
