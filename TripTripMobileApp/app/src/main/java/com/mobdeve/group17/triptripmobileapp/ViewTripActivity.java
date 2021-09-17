@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mobdeve.group17.triptripmobileapp.utils.PreferenceUtils;
@@ -17,6 +18,7 @@ public class ViewTripActivity extends AppCompatActivity {
     private Button btnEditTrip;
     private Button btnDeleteTrip;
     TextView tv_title, tv_startDate, tv_endDate, tv_startLocation, tv_endLocation, tv_descrip;
+    ImageView iv_view_trip_pic;
 
     DatabaseHelper db;
     @Override
@@ -33,6 +35,7 @@ public class ViewTripActivity extends AppCompatActivity {
         this.tv_startLocation = findViewById(R.id.tv_view_start_location);
         this.tv_endLocation = findViewById(R.id.tv_view_end_location);
         this.tv_descrip = findViewById(R.id.tv_view_description);
+        this.iv_view_trip_pic = findViewById(R.id.iv_view_trip_pic);
 
         db = new DatabaseHelper(this);
         Trip trip = new Trip();
@@ -44,6 +47,11 @@ public class ViewTripActivity extends AppCompatActivity {
         this.tv_startLocation.setText(trip.getStartLocation());
         this.tv_endLocation.setText(trip.getEndLocation());
         this.tv_descrip.setText(trip.getDescription());
+
+        if(trip.getTripPicId() != null) {
+            this.iv_view_trip_pic.setVisibility(View.VISIBLE);
+            this.iv_view_trip_pic.setImageBitmap(ImageHelper.toImage(trip.getTripPicId()));
+        }
 
         btnEditTrip.setOnClickListener(new View.OnClickListener() {
             @Override
