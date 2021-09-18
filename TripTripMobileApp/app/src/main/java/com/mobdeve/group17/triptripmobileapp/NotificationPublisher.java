@@ -24,10 +24,6 @@ public class NotificationPublisher extends BroadcastReceiver {
         String startDate = intent.getStringExtra(START_DATE);
         String endLoc = intent.getStringExtra(END_LOCATION);
 
-
-        System.out.println(id);
-        System.out.println(endLoc);
-        System.out.println(startDate);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "notifyTrip")
                 .setSmallIcon(R.drawable.logo)
                 .setContentTitle("Upcoming trip")

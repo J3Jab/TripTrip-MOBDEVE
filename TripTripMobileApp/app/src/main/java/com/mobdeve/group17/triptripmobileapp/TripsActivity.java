@@ -144,13 +144,6 @@ public class TripsActivity extends AppCompatActivity {
                         });
                         adapter.notifyDataSetChanged();
                         break;
-                    case "Start Location":
-                        Log.d("message", "start location");
-                        break;
-                    case "End Location":
-                        Log.d("message", "end location");
-                        break;
-
                 }
             }
             @Override
@@ -212,21 +205,15 @@ public class TripsActivity extends AppCompatActivity {
             }
             long timeBetween = date.getTime() - System.currentTimeMillis();
 
-            Integer id = Long.valueOf(date.getTime() + i).intValue();
-
+            Integer id = Long.valueOf(date.getTime() + this.dataTrips.get(i).getId()).intValue();
             Intent notificationIntent = new Intent(this, NotificationPublisher.class);
             notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, id);
-            System.out.println(id);
             notificationIntent.putExtra(NotificationPublisher.NAME, PreferenceUtils.getName(this));
             notificationIntent.putExtra(NotificationPublisher.START_DATE, this.dataTrips.get(i).getStartDate());
             notificationIntent.putExtra(NotificationPublisher.END_LOCATION, this.dataTrips.get(i).getEndLocation());
-            System.out.println(PreferenceUtils.getName(this));
-            System.out.println(this.dataTrips.get(i).getStartDate());
-            System.out.println(this.dataTrips.get(i).getStartLocation());
-            PreferenceUtils.saveTripDate(this.dataTrips.get(i).getStartDate(), this);
-            PreferenceUtils.saveTripLocation(this.dataTrips.get(i).getStartLocation(), this);
+
             //notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, getNotification(dataTrips.get(i).getStartLocation(), dataTrips.get(i).getStartDate()));
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, i, notificationIntent, 0);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, notificationIntent, 0);
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
             alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + timeBetween, pendingIntent);
@@ -243,16 +230,6 @@ public class TripsActivity extends AppCompatActivity {
 //
 //            }
         }
-    }
-
-    private Notification getNotification(String rocketName, String padName) {
-        Notification.Builder builder = new Notification.Builder(this);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0);
-        builder.setContentIntent(pendingIntent);
-        builder.setContentTitle("Upcoming Launch");
-        builder.setContentText("A launch of a " + rocketName + " is about to occur at " + padName + ". Click for more info.");
-        builder.setSmallIcon(R.drawable.logo);
-        return builder.build();
     }
 
     @Override
