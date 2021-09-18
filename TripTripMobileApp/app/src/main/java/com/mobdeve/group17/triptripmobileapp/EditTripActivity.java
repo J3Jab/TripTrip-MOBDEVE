@@ -73,7 +73,6 @@ EditTripActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_trip);
 
-        //TODO set edit text to trip details from shared preferences
         db = new DatabaseHelper(this);
         Trip trip = new Trip();
 

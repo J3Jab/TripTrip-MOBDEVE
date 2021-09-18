@@ -50,13 +50,17 @@ public class RegisterActivity extends AppCompatActivity {
                 user.setPassword(password.getText().toString());
                 String user_repassword = repassword.getText().toString();
 
+                //check empty fields
                 if(user.getName().equals("") || user.getBirthday().equals("") || user.getEmail().equals("")
                         || user.getPassword().equals("") || user_repassword.equals(""))
                     Toast.makeText(RegisterActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                 else{
+                    //check if inputted email is valid
                     if(isValidEmail(user.getEmail())){
+                        //check if password is the same as confirm password
                         if(user.getPassword().equals(user_repassword)){
                             Boolean checkuser = db.checkUserEmail(user.getEmail());
+                            //check if a user has the same email
                             if(!checkuser){
                                 Boolean insert = db.addUser(user);
                                 if(insert == true){

@@ -62,9 +62,10 @@ public class MainActivity extends AppCompatActivity {
                     String user_email = email.getText().toString().trim();
                     String user_password = password.getText().toString().trim();
 
-                    if(user_email.equals("") || user_password.equals(""))
+                    if(user_email.isEmpty() || user_password.isEmpty())
                         Toast.makeText(MainActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                     else{
+                        //check if user exists
                         Boolean checkuserpass = db.checkUserEmailPassword(user_email, user_password);
                         if(checkuserpass){
                             User user = db.getUser(user_email);
@@ -79,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), TripsActivity.class);
                             startActivity(intent);
 
-                            //prevents user from returning to login activity
-                            //finish();
                         }
                         else{
                             Toast.makeText(MainActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();

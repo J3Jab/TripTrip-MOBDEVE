@@ -132,6 +132,7 @@ public class AddTripActivity extends AppCompatActivity {
                     trip_pic = null;
                 }
 
+                //check if fields are empty
                 if(trip_title.isEmpty()||start_date.isEmpty()||end_date.isEmpty()||
                         start_location.isEmpty()||end_location.isEmpty()){
                     Toast.makeText(AddTripActivity.this, "Please enter all required fields", Toast.LENGTH_SHORT).show();
@@ -182,6 +183,7 @@ public class AddTripActivity extends AppCompatActivity {
             }
         });
 
+        //Add image button
         this.fabAddTripImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,6 +193,7 @@ public class AddTripActivity extends AppCompatActivity {
         });
     }
 
+    // Date Function
     public void initDatePickerDialog(){
 
         Calendar calendar = Calendar.getInstance();
@@ -283,6 +286,7 @@ public class AddTripActivity extends AppCompatActivity {
 //        });
 //    }
 
+    //Trip type dropdown
     public void initDropdown(){
         this.type_dropdown = (Spinner) findViewById(R.id.dropdown_add_trip_type);
 
@@ -313,6 +317,7 @@ public class AddTripActivity extends AppCompatActivity {
                 .show();
     }
 
+    //Image Permission
     private void getStoragePermission(){
         String [] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         if(ContextCompat.checkSelfPermission(getApplicationContext(),

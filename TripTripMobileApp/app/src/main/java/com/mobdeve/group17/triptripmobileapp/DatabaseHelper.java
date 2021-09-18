@@ -79,6 +79,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**
+     * This method is to hash the password
+     */
     private String hash(String password) {
 
         try {
@@ -153,6 +156,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return false;
     }
 
+    /**
+     * This method is to check user with provided email and birthday
+     *
+     * @param email
+     * @param birthday
+     * @return true/false
+     */
     public boolean checkUserEmailBirthday(String email, String birthday) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -294,6 +304,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return trip;
     }
 
+    /**
+     * This method is to get trips of a specific user
+     * @param email
+     * @return trips
+     */
     public ArrayList<Trip> getTripsByUser(String email) {
 
         ArrayList<Trip> trips = new ArrayList<Trip>();

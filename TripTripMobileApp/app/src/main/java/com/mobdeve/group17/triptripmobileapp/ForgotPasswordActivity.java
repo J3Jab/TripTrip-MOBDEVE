@@ -42,7 +42,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 String user_email = etEmail.getText().toString().trim();
                 String user_bday = etBday.getText().toString().trim();
 
-                if(user_email.equals("") || user_bday.equals(""))
+                //check fields that are empty
+                if(user_email.isEmpty() || user_bday.isEmpty())
                     Toast.makeText(ForgotPasswordActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                 else{
                     Boolean checkuser = db.checkUserEmailBirthday(user_email, user_bday);

@@ -46,10 +46,12 @@ public class EditProfileActivity extends AppCompatActivity {
                 String password = etpassword.getText().toString().trim();
                 String repassword = etrepassword.getText().toString().trim();
 
-                if(name.equals("") || password.equals("") || repassword.equals("")){
+                // check if fields are empty
+                if(name.isEmpty() || password.isEmpty()|| repassword.isEmpty()){
                     Toast.makeText(EditProfileActivity.this, "Please enter all required fields", Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    //check if password is equal to confirm password
                     if(password.equals(repassword)){
                         if(password.equals(PreferenceUtils.getPassword(EditProfileActivity.this)))
                             Toast.makeText(EditProfileActivity.this, "New password should not be the same as old password", Toast.LENGTH_LONG).show();
@@ -64,6 +66,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             user.setEmail(PreferenceUtils.getEmail(EditProfileActivity.this));
                             user.setPassword(PreferenceUtils.getPassword(EditProfileActivity.this));
 
+                            //update user in database
                             db.updateUser(user);
 
                             Toast.makeText(EditProfileActivity.this, "Changes made successfully", Toast.LENGTH_SHORT).show();
