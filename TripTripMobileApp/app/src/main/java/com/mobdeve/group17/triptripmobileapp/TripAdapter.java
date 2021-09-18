@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -76,6 +77,11 @@ public class TripAdapter extends RecyclerView.Adapter<TripViewHolder> {
                                 dataTrips.remove(viewHolder.getBindingAdapterPosition());
                                 notifyDataSetChanged();
 
+                                //show empty trips message if no trips are left
+                                if(dataTrips.size()==0) {
+                                    TextView tvEmpty = ((TripsActivity) context).getTvEmpty();
+                                    tvEmpty.setVisibility(View.VISIBLE);
+                                }
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {

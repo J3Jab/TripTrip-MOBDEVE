@@ -61,20 +61,25 @@ public class TripsActivity extends AppCompatActivity {
 
     public void initRecyclerView() {
         db = new DatabaseHelper(this);
-        this.tvEmpty = findViewById(R.id.tv_empty_trips);
+
         this.rv_trips = findViewById(R.id.rv_trips);
         this.dataTrips = db.getTripsByUser(PreferenceUtils.getEmail(this));
-
-        //if trips exist, hide message
-        if(this.dataTrips.size()>0){
-            this.tvEmpty.setVisibility(View.INVISIBLE);
-        }
 
         this.layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         this.rv_trips.setLayoutManager(this.layoutManager);
 
         this.adapter = new TripAdapter(this.dataTrips, this);
         this.rv_trips.setAdapter(this.adapter);
+
+        this.tvEmpty = findViewById(R.id.tv_empty_trips);
+
+        //if trips exist, hide message
+        if(this.adapter.getItemCount()>0){
+            this.tvEmpty.setVisibility(View.INVISIBLE);
+        }
+        else{
+            this.tvEmpty.setVisibility(View.VISIBLE);
+        }
 
         this.fabAdd = findViewById(R.id.fab_add_trip);
         this.fabAdd.setOnClickListener(new View.OnClickListener() {
@@ -257,5 +262,9 @@ public class TripsActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    public TextView getTvEmpty(){
+        return this.tvEmpty;
     }
 }
