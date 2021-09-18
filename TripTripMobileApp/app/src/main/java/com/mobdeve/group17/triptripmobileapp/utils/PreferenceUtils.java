@@ -87,4 +87,29 @@ public class PreferenceUtils {
         return prefs.getInt(Constants.KEY_TRIPID, 0);
     }
 
+    public static boolean saveTripLocation(String trip_Loc, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.KEY_TRIPLOCATION, trip_Loc);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static String getTripLocation(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.KEY_TRIPLOCATION, null);
+    }
+
+    public static boolean saveTripDate(String trip_date, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putString(Constants.KEY_TRIPDATE, trip_date);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static String getTripDate(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getString(Constants.KEY_TRIPDATE, null);
+    }
 }

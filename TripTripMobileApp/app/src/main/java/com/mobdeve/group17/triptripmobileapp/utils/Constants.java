@@ -9,4 +9,6 @@ public class Constants {
 
     public static String KEY_TRIPID = "tripID";
     public static String KEY_TRIPTYPE = "triptype";
+    public static String KEY_TRIPLOCATION = "triplocation";
+    public static String KEY_TRIPDATE = "tripdate";
 }

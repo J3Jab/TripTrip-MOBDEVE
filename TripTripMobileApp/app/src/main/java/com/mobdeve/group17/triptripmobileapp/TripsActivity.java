@@ -10,8 +10,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -46,6 +53,8 @@ public class TripsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_trips);
         initDropdown();
         initRecyclerView();
+        createNotificationChannel();
+        scheduleNotifications();
     }
 
     public void initRecyclerView() {
@@ -174,6 +183,76 @@ public class TripsActivity extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    public void createNotificationChannel(){
+        if (android.os.Build.VERSION. SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            CharSequence name = "TripTrip App";
+            String description = "Channel for Triptrip";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+            NotificationChannel notificationChannel = new NotificationChannel("notifyTrip", name, importance);
+            notificationChannel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+    }
+
+    public void scheduleNotifications() {
+
+        for(int i = 0; i < this.dataTrips.size(); i++) {
+
+            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+            Date date = null;
+            try {
+                date = format.parse(this.dataTrips.get(i).getStartDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            long timeBetween = date.getTime() - System.currentTimeMillis();
+
+            Integer id = Long.valueOf(date.getTime() + i).intValue();
+
+            Intent notificationIntent = new Intent(this, NotificationPublisher.class);
+            notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, id);
+            System.out.println(id);
+            notificationIntent.putExtra(NotificationPublisher.NAME, PreferenceUtils.getName(this));
+            notificationIntent.putExtra(NotificationPublisher.START_DATE, this.dataTrips.get(i).getStartDate());
+            notificationIntent.putExtra(NotificationPublisher.END_LOCATION, this.dataTrips.get(i).getEndLocation());
+            System.out.println(PreferenceUtils.getName(this));
+            System.out.println(this.dataTrips.get(i).getStartDate());
+            System.out.println(this.dataTrips.get(i).getStartLocation());
+            PreferenceUtils.saveTripDate(this.dataTrips.get(i).getStartDate(), this);
+            PreferenceUtils.saveTripLocation(this.dataTrips.get(i).getStartLocation(), this);
+            //notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, getNotification(dataTrips.get(i).getStartLocation(), dataTrips.get(i).getStartDate()));
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, i, notificationIntent, 0);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+            alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + timeBetween, pendingIntent);
+            //Debug. Schedule at 2, 4, 6 minutes.
+//            if (i == 0) {
+//                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), pendingIntent);
+//            }
+//            if (i == 1) {
+//                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 240000, pendingIntent);
+//
+//            }
+//            if (i == 2) {
+//                alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 360000, pendingIntent);
+//
+//            }
+        }
+    }
+
+    private Notification getNotification(String rocketName, String padName) {
+        Notification.Builder builder = new Notification.Builder(this);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), 0);
+        builder.setContentIntent(pendingIntent);
+        builder.setContentTitle("Upcoming Launch");
+        builder.setContentText("A launch of a " + rocketName + " is about to occur at " + padName + ". Click for more info.");
+        builder.setSmallIcon(R.drawable.logo);
+        return builder.build();
     }
 
     @Override
