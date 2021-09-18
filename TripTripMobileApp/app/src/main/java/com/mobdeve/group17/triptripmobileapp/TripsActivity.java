@@ -27,6 +27,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mobdeve.group17.triptripmobileapp.utils.PreferenceUtils;
@@ -45,6 +46,7 @@ public class TripsActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private TripAdapter adapter;
     private FloatingActionButton fabAdd, fabEdit;
+    private TextView tvEmpty;
 
     DatabaseHelper db;
     @Override
@@ -59,9 +61,14 @@ public class TripsActivity extends AppCompatActivity {
 
     public void initRecyclerView() {
         db = new DatabaseHelper(this);
+        this.tvEmpty = findViewById(R.id.tv_empty_trips);
         this.rv_trips = findViewById(R.id.rv_trips);
-        //this.dataTrips = new DataHelper().getTrips();
         this.dataTrips = db.getTripsByUser(PreferenceUtils.getEmail(this));
+
+        //if trips exist, hide message
+        if(this.dataTrips.size()>0){
+            this.tvEmpty.setVisibility(View.INVISIBLE);
+        }
 
         this.layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         this.rv_trips.setLayoutManager(this.layoutManager);
@@ -85,9 +92,6 @@ public class TripsActivity extends AppCompatActivity {
     }
     public void initDropdown(){
         Spinner dropdown = (Spinner) findViewById(R.id.dropdown_sort_date);
-
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MainActivity.this,
-//                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.sort_options));
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(TripsActivity.this,
                 R.layout.item_dropdown, getResources().getStringArray(R.array.sort_options));

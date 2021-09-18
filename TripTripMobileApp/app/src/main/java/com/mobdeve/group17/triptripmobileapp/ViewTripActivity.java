@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -48,7 +49,16 @@ public class ViewTripActivity extends AppCompatActivity {
         this.tv_endDate.setText(trip.getEndDate());
         this.tv_startLocation.setText(trip.getStartLocation());
         this.tv_endLocation.setText(trip.getEndLocation());
-        this.tv_descrip.setText(trip.getDescription());
+
+        //if description is empty
+        if(trip.getDescription().isEmpty()) {
+            this.tv_descrip.setText("No entered description");
+            this.tv_descrip.setTextColor(Color.parseColor("#971C6472"));
+        }
+        else{
+            this.tv_descrip.setText(trip.getDescription());
+        }
+
         this.tv_tripType.setText(trip.getTripType());
 
         //if trip pic exists
