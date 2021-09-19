@@ -86,9 +86,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:ellipsize="marquee"
+            android:gravity="end"
             android:maxLength="15"
-            android:maxLines="1"
-            android:text="End Location"
+            android:singleLine="true"
+            android:text="none"
             android:textColor="@color/highlight_blue"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -115,21 +117,17 @@
 
         <TextView
             android:id="@+id/tv_trip_title"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
             android:ellipsize="end"
-            android:maxLength="10"
-            android:maxLines="2"
-            android:scrollHorizontally="true"
-            android:singleLine="false"
+            android:maxLength="15"
+            android:maxLines="1"
             android:text="Trip Title"
             android:textColor="@color/font_color"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_trip_pic" />
 
@@ -139,9 +137,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="45dp"
             android:ellipsize="end"
-            android:gravity="right"
+            android:gravity="end"
             android:maxLength="15"
             android:maxLines="1"
+            android:singleLine="true"
             android:text="Start Location"
             android:textColor="@color/highlight_blue"
             android:textSize="20sp"
@@ -158,6 +157,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_start_location"
             app:layout_constraintEnd_toStartOf="@+id/tv_start_location"
             app:layout_constraintTop_toTopOf="@+id/tv_start_location"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/pin" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

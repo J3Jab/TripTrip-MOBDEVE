@@ -121,7 +121,7 @@
         android:ems="10"
         android:hint="@string/enter_title"
         android:inputType="text"
-        android:maxLength="20"
+        android:maxLength="15"
         android:textColor="@color/white"
         android:textColorHint="@color/hint_gray"
         android:textStyle="bold"
