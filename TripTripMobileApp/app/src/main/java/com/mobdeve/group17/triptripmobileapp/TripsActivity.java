@@ -115,7 +115,7 @@ public class TripsActivity extends AppCompatActivity {
                         Collections.sort(dataTrips, new Comparator<Trip>() {
                             @Override
                             public int compare(Trip o1, Trip o2) {
-                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                                 long time1 = 0, time2 = 0;
                                 try {
                                     Date date1 = sdf.parse(o1.getStartDate());
@@ -136,7 +136,7 @@ public class TripsActivity extends AppCompatActivity {
                         Collections.sort(dataTrips, new Comparator<Trip>() {
                             @Override
                             public int compare(Trip o1, Trip o2) {
-                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                                 long time1 = 0, time2 = 0;
                                 try {
                                     Date date1 = sdf.parse(o1.getEndDate());
